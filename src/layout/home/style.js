@@ -1,16 +1,30 @@
 import styled from '@emotion/styled'
 
 const HomeLayoutStyle = styled.div`
-  * {
-    font-family: Inter, sans-serif;
+  .calls-body {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    height: 94%;
   }
-
-  .full-height {
+  .calls-container {
+    width: 100%;
     height: 100vh;
   }
 
-  .body {
-    height: 94%;
+  .calls-sidebar {
+    display: flex;
+    flex: 1;
+  }
+
+  .calls-leftFold {
+    display: flex;
+    flex: 3;
+  }
+
+  .calls-rightFold {
+    display: flex;
+    flex: 11;
   }
 `
 

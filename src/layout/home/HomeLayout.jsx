@@ -1,21 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Col, Row } from 'antd'
 import HomeLayoutStyle from './style'
-import HomeHeader from './header/Header'
-import SideBar from './side-bar/SideBar'
+import Sidebar from './sidebar/SideBar'
+import Header from './header/Header'
 
 const HomeLayout = ({ children }) => {
   return (
     <HomeLayoutStyle>
-      <div className="full-height">
-        <HomeHeader />
-        <Row className="body">
-          <Col span={1} className="side-bar">
-            <SideBar />
-          </Col>
-          <Col span={23}> {children}</Col>
-        </Row>
+      <div className="calls-container">
+        <Header />
+        <div className="calls-body">
+          <div className="calls-sidebar">
+            <Sidebar />
+          </div>
+          <div className="calls-leftFold">{/* <LeftFold /> */}</div>
+          <div className="calls-rightFold">{/* <RightFold /> */}</div>
+        </div>
       </div>
     </HomeLayoutStyle>
   )

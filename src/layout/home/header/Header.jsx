@@ -1,33 +1,54 @@
 import React from 'react'
-import { Col, Row } from 'antd'
-import { ReadOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
-import CurrentUser from './CurrenUser'
+import { LogoutOutlined, MoreOutlined } from '@ant-design/icons'
+import { Avatar, Tooltip } from 'antd'
+import defaultAvatar from '../../../assets/images/avatar.png'
 import HeaderWrapper from './style'
+import { getToken, removeToken } from 'core/token'
+import { getCurrentUser, removeCurrentUser } from 'core/currentUser'
+import useRouter from 'shared/hooks/useRouter'
 
-const HomeHeader = () => {
+function Header() {
+  const appName = 'Online Learning'
+
+  const profile = JSON.parse(getCurrentUser())
+  const { history } = useRouter()
+
+  const onLogout = () => {
+    const token = getToken()
+    if (token) {
+      removeToken(token)
+      removeCurrentUser(profile)
+      history.push('/login')
+    }
+  }
+
   return (
     <HeaderWrapper>
-      <Row className="header">
-        <Col span={1} className="logo-holder">
-          <Link to="/home" className="logo">
-            <ReadOutlined style={{ fontSize: '40px' }} />
-          </Link>
-        </Col>
-        <Col span={23}>
-          <Row className="items-center">
-            <Col span={5} className="app-name">
-              <span> App </span>
-            </Col>
-            <Col span={14} />
-            <Col span={5} className="flex justify-end">
-              <CurrentUser />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+      <div className="header">
+        <div className="header-menu">
+          <i className="fi-rr-layout-fluid" />
+        </div>
+        <div className="header-leftFold">
+          <span className="header-label">{appName}</span>
+        </div>
+        <div className="header-rightFold">
+          <div className="header-search">
+            <i className="fi-rr-search" />
+            <input placeholder="Search" />
+          </div>
+          <div className="header-profile">
+            <Avatar className="header-avatar" alt="" src={defaultAvatar} />
+            <Tooltip title="Profile" className="profile-options">
+              <MoreOutlined rotate={90} />
+            </Tooltip>
+            <Tooltip title="Logout" className="btn-logout" onClick={onLogout}>
+              <LogoutOutlined />
+            </Tooltip>
+          </div>
+        </div>
+      </div>
     </HeaderWrapper>
   )
 }
 
-export default HomeHeader
+export default Header

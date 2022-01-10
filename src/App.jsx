@@ -15,6 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <GuardRoute isPrivate path="/" component={loadable(import('./pages/home/Home'))} exact />
         <GuardRoute path="/login" component={loadable(import('./pages/auth/login/Login'))} exact />
         <Route path="*" component={loadable(import('./pages/404Page'))} exact />
       </Switch>

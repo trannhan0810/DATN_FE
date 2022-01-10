@@ -10,20 +10,10 @@ const GuardRoute = ({ isPrivate = false, isAdmin = false, ...rest }) => {
   const token = getToken()
   const user = getCurrentUser() && JSONParse(getCurrentUser())
 
-  const currentUserIsQA = user?.role?.name === 'qa'
-  const currentUserIsEmployee = user?.role?.name === 'employee'
-
-  console.log(token, user)
-
   if (!token && isPrivate) {
     return <Redirect to="/login" />
   }
-  if (token && isPrivate && isAdmin && currentUserIsEmployee) {
-    return <Redirect to="/leads-contact" />
-  }
-  if (token && isPrivate && isAdmin && currentUserIsQA) {
-    return <Redirect to="/employee-of-qa" />
-  }
+
   // if (token && !isPrivate) {
   //   return <Redirect to="/" />
   // }

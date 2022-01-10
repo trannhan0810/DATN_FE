@@ -7,7 +7,6 @@ const SidebarWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  z-index: -2;
 `
 
 export default SidebarWrapper

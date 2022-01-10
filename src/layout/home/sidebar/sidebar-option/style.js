@@ -26,7 +26,7 @@ const SidebarOptionWrapper = styled.div`
   }
 
   .sidebar-option:hover {
-    color: #6264a7;
+    color: #7274b7;
   }
 `
 export default SidebarOptionWrapper

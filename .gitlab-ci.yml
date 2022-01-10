@@ -1,0 +1,64 @@
+stages:
+  - deploy-dev
+  - deploy-staging
+  - deploy-release
+  - clean-after-deloy
+
+deploy-dev:
+  stage: deploy-dev
+  tags: 
+    - shell-biz
+  before_script:
+    - docker build -t telesale-web-dev-image .   
+  script:
+    - docker stop telesale-web-dev || true && docker rm telesale-web-dev || true
+    - docker run -p 4002:80 -d --name telesale-web-dev telesale-web-dev-image
+#    - docker run -p 4002:80 -d --name telesale-web-dev -e REACT_APP_SERVER_URL=http://api-development.patience.vn/api  telesale-web-dev-image
+  environment:
+    name: development
+    url: http://development.patience.vn
+  only:
+    - develop
+
+deploy-staging:
+  stage: deploy-staging
+  tags: 
+    - shell-biz
+  before_script:
+    - docker build -t telesale-web-staging-image .   
+  script:
+    - docker stop telesale-web-staging || true && docker rm telesale-web-staging || true
+    - docker run -p 7002:80 -d --name telesale-web-staging telesale-web-staging-image
+#    - docker run -p 7002:80 -d --name telesale-web-staging -e REACT_APP_SERVER_URL=http://api-staging.patience.vn/api  telesale-web-staging-image
+  environment:
+    name: development
+    url: http://staging.patience.vn
+  only:
+    - staging
+
+deploy-release:
+  stage: deploy-release
+  tags: 
+    - shell-biz
+  before_script:
+    - docker build -t telesale-web-release-image .   
+  script:
+    - docker stop telesale-web-release || true && docker rm telesale-web-release || true
+    - docker run -p 9090:80 -d --name telesale-web-release telesale-web-release-image
+#    - docker run -p 7002:80 -d --name telesale-web-staging -e REACT_APP_SERVER_URL=http://api-staging.patience.vn/api  telesale-web-staging-image
+  environment:
+    name: release
+    url: http://patience.vn
+  only:
+    - release
+
+clean-after-deloy:
+  stage: clean-after-deloy
+  tags:
+    - shell-biz
+  script:
+    - docker image prune -f
+  only:
+    - dev
+    - staging
+    - release

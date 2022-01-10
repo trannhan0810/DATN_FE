@@ -1,0 +1,41 @@
+{
+  "env": {
+    "development": {
+      "presets": ["react-app"],
+      "plugins": [
+        [
+          "module-resolver",
+          {
+            "root": ["./src"]
+          }
+        ]
+      ]
+    },
+    "production": {
+      "presets": ["react-app"],
+      "plugins": [
+        [
+          "transform-react-remove-prop-types",
+          {
+            "removeImport": "true",
+            "ignoreFilenames": ["node_modules"]
+          }
+        ],
+        "transform-remove-console",
+        [
+          "module-resolver",
+          {
+            "root": ["./src"]
+          }
+        ],
+        [
+          "import",
+          {
+            "libraryName": "antd",
+            "libraryDirectory": "es"
+          }
+        ]
+      ]
+    }
+  }
+}

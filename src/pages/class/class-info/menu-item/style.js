@@ -1,0 +1,25 @@
+import styled from '@emotion/styled'
+
+const ClassMenuItemWrapper = styled.div`
+  .menu-item {
+    padding: 8px 0px;
+    display: flex;
+    align-items: center;
+  }
+  .item-label {
+    font-size: 16px;
+    font-weight: 300;
+  }
+  .item-icon {
+    font-size: 20px;
+    margin-right: 12px;
+    font-weight: 300;
+    color: #616161;
+  }
+
+  .item-active {
+    background-color: #f3efea;
+  }
+`
+
+export default ClassMenuItemWrapper

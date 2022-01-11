@@ -16,8 +16,8 @@ export const SidebarData = [
   },
   {
     id: 3,
-    name: 'Teams',
-    path: '/team',
+    name: 'Class',
+    path: '/classes',
     icon: <GroupOutlined />,
   },
   // {

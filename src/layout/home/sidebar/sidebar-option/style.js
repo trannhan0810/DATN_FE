@@ -22,7 +22,7 @@ const SidebarOptionWrapper = styled.div`
 
   .active {
     color: #6264a7;
-    border-left: 4px solid #6264a7;
+    border-left: 8px solid #6264a7;
   }
 
   .sidebar-option:hover {

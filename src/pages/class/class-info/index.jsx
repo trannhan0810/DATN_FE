@@ -1,17 +1,23 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Button, Tooltip } from 'antd'
 import React, { useState } from 'react'
-import { Redirect } from 'react-router'
+import { Redirect, useLocation } from 'react-router'
 import { LeftOutlined, UserAddOutlined } from '@ant-design/icons'
 import classImg from '../../../assets/images/class-img.jpg'
 import { DialerList } from './member'
 import MemberItem from './member-item/member-item'
 import './left-fold.css'
+import useRouter from 'shared/hooks/useRouter'
 
 function LeftFold() {
   const dialerList = DialerList
   const [redirect, setRedirect] = useState('')
-  const backToAllClasses = () => setRedirect('/classes')
+  const location = useLocation()
+  const { history } = useRouter()
+  const backToAllClasses = () => {
+    history.push(location.pathname)
+    setRedirect('/classes')
+  }
 
   const classDetail = {
     name: 'Art Is Kaboommmm!',
@@ -23,13 +29,12 @@ function LeftFold() {
     <div className="leftFold">
       {redirect.length > 1 && <Redirect to={redirect} />}
       <div className="leftFold-top">
-        <div>
+        <div className="leftFold-header">
           <Tooltip title="All classes" onClick={backToAllClasses}>
             <LeftOutlined />
           </Tooltip>
           <label className="menu-label">Class</label>
         </div>
-        <hr />
         <img className="class-img" src={classDetail.avatar} alt="" />
         <h1 className="class-name">{classDetail.name}</h1>
       </div>

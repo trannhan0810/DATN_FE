@@ -1,22 +1,22 @@
 import React from 'react'
-import ClassPageStyle from './style'
-import ClassInfo from './class-info'
+import ClassesPageStyle from './style'
 import RightFold from './right-fold'
 import HomeLayout from 'layout/home/HomeLayout'
 
-const Class = () => {
+const Classes = () => {
   return (
     <HomeLayout>
-      <ClassPageStyle>
-        <div className="home-leftFold">
-          <ClassInfo />
+      <ClassesPageStyle>
+        {/* <div className="home-leftFold">
+          <LeftFold />
         </div>
         <div className="home-rightFold">
           <RightFold />
-        </div>
-      </ClassPageStyle>
+        </div> */}
+        <RightFold />
+      </ClassesPageStyle>
     </HomeLayout>
   )
 }
 
-export default Class
+export default Classes

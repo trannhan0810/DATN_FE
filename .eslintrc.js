@@ -54,5 +54,11 @@ module.exports = {
     'no-unused-vars': 'warn',
     'consistent-return': 'off',
     'no-param-reassign': ['warn', { props: true, ignorePropertyModificationsFor: ['state'] }],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
   },
 }

@@ -1,39 +1,55 @@
 .class-card {
   background-color: white;
-  width: 28%;
+  width: 30%;
   height: 120px;
   margin: 16px 8px;
   padding: 16px;
   border-radius: 8px;
+  box-shadow: 8px 8px 8px #eee;
   cursor: pointer;
 }
 
-.class-avatar {
-  height: 80px;
-  width: 80px;
+.class-card  label {
+  cursor: pointer;
+}
+
+.class-card-avatar {
+  height: 88px;
+  width: 88px;
   border-radius: 10%;
   background-color: black;
 }
 
-.class-top {
+.class-card-icon {
   display: flex;
+  font-size: 24px;
+  font-weight: 600;
+  z-index: 1;
 }
-.class-icons {
-  display: flex;
-  margin-top: 16px;
-  justify-content: space-between;
-  width: 40%;
-}
-.class-info {
+
+.class-card-info {
+  flex: 1;
   display: flex;
   flex-direction: column;
   margin-left: 16px;
 }
 
-.class-title {
+.class-card-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.class-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.class-card-title {
   font-weight: 600;
 }
-.class-subtitle {
+.class-card-subtitle {
   font-size: 12px;
   margin: 6px 0px;
 }

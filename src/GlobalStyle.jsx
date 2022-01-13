@@ -12,7 +12,7 @@ const GlobalStyle = props => {
         ${emotionNormalize}
         ${CLASS_UTILITY}
         :root {
-          --primary-color: #152d79;
+          --primary-color: #464775;
           --mix-primary-color: #03658c;
           --font: 'Roboto', 'HelveticaNeue', 'Helvetica Neue', sans-serif;
           --subtitle: #9fa2aa;

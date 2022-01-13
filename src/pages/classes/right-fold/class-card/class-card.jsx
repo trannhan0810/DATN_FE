@@ -4,6 +4,7 @@ import './class-card.css'
 import PropTypes from 'prop-types'
 import { Redirect, useLocation } from 'react-router'
 import { Tooltip } from 'antd'
+import { MoreOutlined } from '@ant-design/icons'
 import useRouter from 'shared/hooks/useRouter'
 
 function ClassCard({ item }) {
@@ -17,13 +18,16 @@ function ClassCard({ item }) {
   }
 
   return (
-    <Tooltip className="class-card" onClick={redirect}>
+    <Tooltip className="class-card flex" onClick={redirect}>
       {isRedirect && <Redirect to={`/classes/${item.id}`} />}
-      <div className="class-top">
-        <img src={item.avatar} alt="" className="class-avatar" />
-        <div className="class-info">
-          <label className="class-title">{item.name}</label>
-          <label className="class-subtitle">{item.type}</label>
+      <img src={item.avatar} alt="" className="class-card-avatar" />
+      <div className="class-card-info">
+        <div className="class-card-menu">
+          <label className="class-card-title">{item.name}</label>
+          <MoreOutlined className="class-card-icon" rotate={90} />
+        </div>
+        <div className="class-card-content">
+          <label className="class-card-subtitle">{item.type}</label>
         </div>
       </div>
     </Tooltip>

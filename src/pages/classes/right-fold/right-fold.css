@@ -9,16 +9,26 @@
   border-bottom: 2px solid lightgray;
 }
 
+.rightFold-options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.contact-list {
+  display: flex;
+  flex-flow: row wrap;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  justify-content: flex-start;
+  height: 83%;
+}
+
+
 .heading-label {
   font-size: 24px;
   font-weight: 500;
 }
 
-.rightFold-options {
-  display: flex;
-  justify-content: space-between;
-  margin: 16px 0px;
-}
 
 .btn-list {
   width: fit-content;
@@ -68,9 +78,3 @@
   color: #d0d0d0;
 }
 
-.contact-list {
-  display: flex;
-  flex-wrap: wrap;
-  overflow: scroll;
-  justify-content: flex-start;
-}

@@ -40,7 +40,7 @@ function LeftFold() {
       </div>
 
       <div className="leftFold-bottom">
-        <div className="flex">
+        <div className="flex space-between">
           <div className="justify-left flex">
             <label className="dialer-label">Member ({classDetail.numOfMember}) </label>
           </div>

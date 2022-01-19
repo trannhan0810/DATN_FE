@@ -21,6 +21,7 @@ function App() {
         <GuardRoute isPrivate path="/classes/1" component={loadable(import('./pages/class'))} exact />
         <GuardRoute isPrivate path="/classes" component={loadable(import('./pages/classes'))} exact />
         <GuardRoute isPrivate path="/calls" component={loadable(import('./pages/home/Home'))} exact />
+        <GuardRoute isPrivate path="/meeting" component={loadable(import('./pages/meeting'))} exact />
         <GuardRoute isPrivate path="/file" component={loadable(import('./pages/home/Home'))} exact />
         <GuardRoute path="/login" component={loadable(import('./pages/auth/login/Login'))} exact />
         <Route path="*" component={loadable(import('./pages/404Page'))} exact />

@@ -14,16 +14,7 @@ const Login = () => {
   const onSubmit = async values => {
     dispatch(loginAuth(values))
       .then(unwrapResult)
-      .then(user => {
-        if (user.role.name === 'employee') {
-          history.push('/leads-contact')
-        }
-        if (user.role.name === 'qa') {
-          history.push('/users')
-        } else {
-          history.push('/')
-        }
-      })
+      .then(() => history.push('/'))
       .catch(showError)
   }
   return (

@@ -1,0 +1,49 @@
+
+.meeting-control-container {
+    position: absolute;
+    height: 10vh;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.meeting-control-btn {
+    margin: 10px;
+    color: white;
+    border: 3px solid white;
+    border-radius: 10%;
+    padding: 3px;
+}
+
+.meeting-control-btn:hover {
+   background-color: #8888; 
+}
+
+.meeting-control-btn:active {
+    color: red; 
+    border-color: red;
+ }
+
+.end-meeting-btn {
+    background-color: red;
+    color: white;
+    border: 3px solid red;
+    border-radius: 10%;
+    padding: 3px;
+    align-items: center;
+    display: flex;
+}
+.end-meeting-btn span {
+    margin: 0px 10px;
+    font-size: 24px;
+}
+
+.meeting-control-icon {
+    font-size: 30px;
+}
+
+

@@ -6,9 +6,9 @@ import { login, forgotPassword, verifyForgotPasswordCode, resetPassword } from '
 export const loginAuth = createAsyncThunk('login', async (params, { rejectWithValue }) => {
   try {
     const response = await login(params)
-    setToken(response.data.token)
-    setCurrentUser(response.data.user)
-    return response.data.user
+    setToken(response.token)
+    setCurrentUser(response.user)
+    return response.user
   } catch (error) {
     return rejectWithValue(error)
   }

@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 
-const ClassesPageStyle = styled.div`
+const ClassesPageWrapper = styled.div`
+  height: 100%;
+  width: 100%;
   display: flex;
   flex: 14;
 
@@ -15,4 +17,4 @@ const ClassesPageStyle = styled.div`
   }
 `
 
-export default ClassesPageStyle
+export default ClassesPageWrapper

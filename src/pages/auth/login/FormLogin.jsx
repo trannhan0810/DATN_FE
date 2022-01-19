@@ -14,11 +14,7 @@ const FormLogin = ({ onSubmit }) => {
       <h2 className="t-400-25px-34px">Welcome to Patcredit</h2>
       <Form onFinish={onSubmit} layout="vertical">
         <div className="form-content">
-          <FormItem
-            label="Tên đăng nhập"
-            name="userIdentity"
-            rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập' }]}
-          >
+          <FormItem label="email" name="email" rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập' }]}>
             <Input type="text" size="large" />
           </FormItem>
           <FormItem label="Mật khẩu" name="password" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}>

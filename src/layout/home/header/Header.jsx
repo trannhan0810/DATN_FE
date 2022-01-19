@@ -37,6 +37,7 @@ function Header() {
             <input placeholder="Search" />
           </div>
           <div className="header-profile">
+            <span className="header-user-name"> Name </span>
             <Avatar className="header-avatar" alt="" src={defaultAvatar} />
             <Tooltip title="Profile" className="profile-options">
               <MoreOutlined rotate={90} />

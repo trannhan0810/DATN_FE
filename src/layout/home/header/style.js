@@ -65,6 +65,11 @@ const HeaderWrapper = styled.div`
     padding-right: 16px;
   }
 
+  .header-user-name {
+    margin-right: 16px;
+    font-size: 24px;
+  }
+
   .header-avatar {
     height: 32px;
     border-radius: 50%;

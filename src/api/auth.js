@@ -1,6 +1,6 @@
 import request from 'core/request'
 
-export const login = params => request.post('Tokens', params)
+export const login = params => request.post('api/v1/login', params)
 
 export const forgotPassword = ({ email }) => request.post('auth/forgotPassword', { email })
 

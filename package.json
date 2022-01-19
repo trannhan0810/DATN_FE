@@ -67,7 +67,7 @@
   },
   "scripts": {
     "prebuild": "npm run generate-build-meta",
-    "generate-build-meta": "./node_modules/react-clear-cache/bin/cli.js",
+    "generate-build-meta": "node ./node_modules/react-clear-cache/bin/cli.js",
     "start": "cross-env NODE_ENV=development & craco start",
     "build": "cross-env NODE_ENV=production & craco build",
     "test": "craco test",

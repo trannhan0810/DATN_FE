@@ -4,6 +4,7 @@ const MeetingPageWrapper = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
+  background-color: #202124;
 
   .video-container {
     height: 100%;
@@ -11,6 +12,7 @@ const MeetingPageWrapper = styled.div`
     top: 0;
     left: 0;
     z-index: -1;
+    background-color: #202124;
   }
 
   .messenger-container {

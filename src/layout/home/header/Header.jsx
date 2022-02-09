@@ -28,7 +28,7 @@ function Header() {
         <div className="header-menu">
           <i className="fi-rr-layout-fluid" />
         </div>
-        <div className="header-leftFold">
+        <div className="header-appName">
           <span className="header-label">{appName}</span>
         </div>
         <div className="header-rightFold">

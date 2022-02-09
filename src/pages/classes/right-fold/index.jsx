@@ -1,15 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Tooltip } from 'antd'
 import React from 'react'
-import { ClassList } from './classList'
+import PropTypes from 'prop-types'
 import ContactCard from './class-card/class-card'
 import './right-fold.css'
 import JoinClassModal from './join-class-modal/JoinClassModal'
 import useToggle from 'shared/hooks/useToggle'
 
-function RightFold() {
-  const classes = ClassList
-
+function RightFold(props) {
+  const { classes } = props
   const { isVisible: isJoinClassVisible, onClose: closeJoinClassModal, onOpen: openJoinClassModal } = useToggle()
 
   return (
@@ -55,6 +53,10 @@ function RightFold() {
       />
     </>
   )
+}
+
+RightFold.propTypes = {
+  classes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
 }
 
 export default RightFold

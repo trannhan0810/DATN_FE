@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MeetingPageWrapper from './style'
 import MeetingControlBar from './control-bar'
 
 const Meeting = () => {
+  const [msgs, setMsgs] = useState([])
+
   return (
     <MeetingPageWrapper>
-      <video className="video-container" src="" controls>
-        <track kind="captions" />
-      </video>
-      <MeetingControlBar />
-      <div className="messenger-container">
-        <h1>sabsa</h1>
+      <div className="video-grid">
+        <video className="video-container" src="" controls>
+          <track kind="captions" />
+        </video>
+        <div className="info-container">
+          <div className="messenger" />
+        </div>
       </div>
+
+      <MeetingControlBar />
     </MeetingPageWrapper>
   )
 }

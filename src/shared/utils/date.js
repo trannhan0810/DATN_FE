@@ -7,6 +7,10 @@ const getDate = prevDays => {
 }
 export default getDate
 
+export const formatTime = (date, formatter = 'h:mm A') => {
+  return dayjs(date).format(formatter)
+}
+
 export const formatDateTime = (date, formatter = 'DD/MM/YYYY') => {
   return dayjs(date).subtract(7, 'hour').format(formatter)
 }

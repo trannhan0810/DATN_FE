@@ -18,7 +18,7 @@ const HeaderWrapper = styled.div`
     font-size: 20px;
   }
 
-  .header-leftFold {
+  .header-appName {
     display: flex;
     flex: 3;
     justify-content: flex-start;

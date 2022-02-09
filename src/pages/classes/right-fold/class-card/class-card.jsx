@@ -26,7 +26,7 @@ function ClassCard({ item }) {
 
 ClassCard.propTypes = {
   item: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     avatar: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.string,

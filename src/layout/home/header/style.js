@@ -1,8 +1,12 @@
 import styled from '@emotion/styled'
 
 const HeaderWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+
   .header {
     width: 100%;
+    height: 100%;
     display: flex;
     flex: 1;
     background-color: #464775;
@@ -23,6 +27,12 @@ const HeaderWrapper = styled.div`
     flex: 3;
     justify-content: flex-start;
     align-items: center;
+  }
+
+  @media only screen and (max-width: 400px) {
+    .header-appName {
+      display: none;
+    }
   }
 
   .header-label {

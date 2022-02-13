@@ -11,10 +11,12 @@ const HomeLayout = ({ children }) => {
         <Header />
       </div>
       <div className="home-body">
-        <div className="home-sidebar">
-          <Sidebar />
+        <div className="home-body-inner">
+          <div className="home-sidebar">
+            <Sidebar />
+          </div>
+          <div className="content">{children}</div>
         </div>
-        <div className="content">{children}</div>
       </div>
     </HomeLayoutStyle>
   )

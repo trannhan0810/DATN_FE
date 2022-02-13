@@ -7,7 +7,6 @@ import RightFold from './right-fold'
 import HomeLayout from 'layout/home/HomeLayout'
 import { getClassById, getClasses } from 'api/class'
 import { showError } from 'core/tools'
-import Messenger from 'pages/video-chat/Messenger/Messenger'
 
 const Class = () => {
   const { id } = useParams()
@@ -33,7 +32,6 @@ const Class = () => {
           <ClassInfo classInfo={classInfo} />
         </div>
         <div className="home-rightFold">
-          <Messenger />
           <RightFold />
         </div>
       </ClassPageStyle>

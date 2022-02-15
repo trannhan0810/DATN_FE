@@ -126,8 +126,12 @@ const GlobalStyle = props => {
         }
         // Antd Modal
         .ant-modal-header {
-          background-color: rgba(255, 165, 0, 0.376);
+          background-color: rgba(35, 36, 57, 0.9);
           text-align: center;
+
+          .ant-modal-title {
+            color: white;
+          }
         }
       `}
     />

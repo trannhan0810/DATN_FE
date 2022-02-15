@@ -7,7 +7,7 @@ export const JSONParse = text => {
       return JSON.parse(text)
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(error.toString())
+      console.error('Warning: ', error.toString())
     }
   }
 }

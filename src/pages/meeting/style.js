@@ -1,30 +1,36 @@
 import styled from '@emotion/styled'
 
 const MeetingPageWrapper = styled.div`
-  height: 100vh;
-  width: 100%;
-  display: flex;
   background-color: #202124;
+  height: 100vh;
+  width: 100wh;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-x: hidden;
 
-  .video-container {
-    height: 100%;
+  .meeting-main {
+    min-height: 0px;
     width: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-color: #202124;
+    flex: 1 1 0px;
+    display: flex;
+
+    .meeting-videos {
+      height: 100%;
+      padding: 5px;
+    }
+
+    .meeting-info {
+      height: 100%;
+      padding: 5px;
+    }
   }
 
-  .messenger-container {
-    width: 30vw;
-  }
-
-  .messenger-container {
-    height: 100%
-    width: 30vw;
-    top: 0;
-    right: 0;
-    background-color: #aaa;
+  .control-bar {
+    width: 100%;
+    flex: 0 1 100px;
+    display: flex;
   }
 `
 

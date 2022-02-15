@@ -38,7 +38,7 @@ const Room = props => {
   const [messageAlert, setMessageAlert] = useState(false)
 
   // const { isAuthenticated, loginWithRedirect, isLoading, user } = useAuth0()
-  const user = getCurrentUser()
+  const user = getCurrentUser() && JSON.parse(getCurrentUser())
   const [loading, setLoading] = useState(false)
   const [popUp, setPopUp] = useState('')
   const [peers, setPeers] = useState([])
@@ -75,15 +75,9 @@ const Room = props => {
           userStream.current = myStream
           videoTrack.current = userStream.current.getTracks()[1]
           audioTrack.current = userStream.current.getTracks()[0]
-
-          console.log(videoTrack.current)
-          console.log(audioTrack.current)
-          console.log(userVideo.current)
           userVideo.current.srcObject = myStream
-          // const userAlias =
-          //   'given_name' in user && user.given_name.length > 0 ? `${user.given_name} ${user.family_name}` : user.email
 
-          const userAlias = user?.fullName
+          const userAlias = user.fullName
           socketRef.current.emit('join room', {
             room: roomID,
             userIdentity: userAlias,
@@ -91,6 +85,7 @@ const Room = props => {
           })
 
           socketRef.current.on('permit?', payload => {
+            console.log('Ask permit')
             permitAudio.play()
             const socketid = payload.id
             joiningSocket.current = socketid
@@ -206,7 +201,6 @@ const Room = props => {
           setPopUp('Waiting')
           // const userAlias =
           //   'given_name' in user && user.given_name.length > 0 ? `${user.given_name} ${user.family_name}` : user.email
-          const user = getCurrentUser()
           const userAlias = user.fullName
           socketRef.current.emit('permission', {
             user: userAlias,
@@ -522,7 +516,6 @@ const Room = props => {
 
   const sendMsg = msg => {
     // also send the message in the backend
-    const user = getCurrentUser() && JSON.parse(getCurrentUser())
     sendChatMsg(roomID, user.email, msg)
       .then(() => {
         messageListReducer({

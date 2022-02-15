@@ -11,6 +11,7 @@ import './VideoChatHome.scss'
 import request from '../../../core/request'
 import PropTypes from 'prop-types'
 import { getCurrentUser } from 'core/currentUser'
+import { createNewMeeting } from 'api/meeting'
 
 const VideoChatHome = props => {
   const silenceAudio = new Audio('/sounds/silence.mp3')
@@ -38,7 +39,7 @@ const VideoChatHome = props => {
   const startNewMeeting = async () => {
     setLoading(true)
     const roomId = uuid()
-    const user = JSON.parse(getCurrentUser())
+    const user = getCurrentUser() && JSON.parse(getCurrentUser())
     const userId = await createUser(user.email, user.fullName, '')
     const chatId = await createChat(roomId, user.email, user.fullName)
     if (!chatId) {
@@ -49,26 +50,13 @@ const VideoChatHome = props => {
     } else {
       // chat created successfully
       try {
-        const data = {
-          room: roomId,
-          chat: chatId,
-          admin: user.email,
-        }
-        const config = {
-          method: 'post',
-          url: 'http://localhost:3001/new_meeting',
-          data,
-        }
-
-        const response = await axios(config)
-        if (response.data === 'success') {
+        const data = { room: roomId, chat: chatId, admin: user.email }
+        const response = await createNewMeeting(data)
+        if (response === 'success') {
           setLoading(false)
           props.history.push({
             pathname: `/videochat/room/${roomId}`,
-            state: {
-              authorised: true, // we are entering the videocall securely through app's interface
-              admin: true,
-            },
+            state: { authorised: true, admin: true },
           })
         } else {
           setLink('')
@@ -93,10 +81,10 @@ const VideoChatHome = props => {
 
     // check if the meeting link is valid i.e. contains atleast one user
     try {
+      console.log(roomId)
       const response = await request.post('/existing_meeting', {
         room: roomId,
       })
-      console.log(response)
       if (response.status === 'failure') {
         setLink('')
         setLoading(false)
@@ -108,10 +96,7 @@ const VideoChatHome = props => {
         setLoading(false)
         props.history.push({
           pathname: `/videochat/room/${roomId}`,
-          state: {
-            authorised: true,
-            admin: false,
-          },
+          state: { authorised: true, admin: false },
         })
       }
     } catch (err) {

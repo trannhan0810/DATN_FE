@@ -21,6 +21,7 @@ const VideoGrid = ({ children, numOfItem }) => {
     const gridHeight = videoGridRef.current.clientHeight
     let bestRatio = 99999999
     let bestSize = [1, n]
+    // eslint-disable-next-line no-constant-condition
     for (let colNum = 1; true; colNum += 1) {
       const rowNum = Math.ceil(n / colNum)
       const newRatio = gridWidth / colNum / (gridHeight / rowNum)
@@ -52,7 +53,10 @@ const VideoGrid = ({ children, numOfItem }) => {
         <div
           key={displayPeers[i]}
           className="grid-item"
-          style={{ flexBasis: `${Math.floor(100 / numOfColumn)}%`, height: `${Math.floor(100 / numOfRow)}%` }}
+          style={{
+            flexBasis: `${Math.floor(100 / numOfColumn)}%`,
+            height: `${Math.floor(100 / numOfRow)}%`,
+          }}
         >
           {child}
         </div>

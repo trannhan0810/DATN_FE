@@ -1,5 +1,6 @@
 import React from 'react'
 import { Col, Row } from 'antd'
+import PropTypes from 'prop-types'
 import MeetingControllerWrapper from './style'
 import CallEndButton from './buttons/CallEndButton'
 import VideoButton from './buttons/VideoButton'
@@ -7,7 +8,7 @@ import AudioButton from './buttons/AudioButton'
 import ShareScreenButton from './buttons/ShareScreenButton'
 import CopyIdButton from './buttons/CopyIdButton'
 import MessengerButton from './buttons/MessengerButton'
-import ParticipantButton from './buttons/ParticipaneButton'
+import ParticipantButton from './buttons/ParticipantButton'
 import useWindowDimensions from 'shared/hooks/useWindowDimensions'
 
 const MeetingController = () => {

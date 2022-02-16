@@ -8,7 +8,7 @@ const MeetingPageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  overflow-x: hidden;
+  overflow: hidden;
 
   .meeting-main {
     min-height: 0px;
@@ -17,11 +17,16 @@ const MeetingPageWrapper = styled.div`
     display: flex;
 
     .meeting-videos {
+      display: flex;
+      flex: 1 1 0;
       height: 100%;
       padding: 5px;
     }
 
     .meeting-info {
+      min-width: 480px;
+      display: flex;
+      flex: 0 0 480px;
       height: 100%;
       padding: 5px;
     }

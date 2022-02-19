@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { FlareSharp } from '@mui/icons-material'
 import ClassesPageWrapper from './style'
 import RightFold from './right-fold'
 import { ClassList } from './classList'
@@ -21,13 +22,7 @@ const Classes = () => {
     }
   }, [])
 
-  return (
-    <HomeLayout>
-      <ClassesPageWrapper>
-        <RightFold classes={classes} />
-      </ClassesPageWrapper>
-    </HomeLayout>
-  )
+  return <HomeLayout isHaveLeftFold={false} RightFold={<RightFold classes={classes} />} />
 }
 
 export default Classes

@@ -1,6 +1,8 @@
 import React from 'react'
 import { LogoutOutlined, MoreOutlined } from '@ant-design/icons'
-import { Avatar, Tooltip } from 'antd'
+import { Avatar, Menu, Tooltip } from 'antd'
+import PropTypes from 'prop-types'
+import { MenuOutlined } from '@mui/icons-material'
 import defaultAvatar from '../../../assets/images/avatar.png'
 import HeaderWrapper from './style'
 import { getToken, removeToken } from 'core/token'
@@ -8,11 +10,12 @@ import { getCurrentUser, removeCurrentUser } from 'core/currentUser'
 import useRouter from 'shared/hooks/useRouter'
 import useWindowDimensions from 'shared/hooks/useWindowDimensions'
 
-function Header() {
+function Header(props) {
   const profile = JSON.parse(getCurrentUser())
   const { history } = useRouter()
   const { width } = useWindowDimensions()
   const appName = width > 800 ? 'Online Learning' : ''
+  const { onClickIcon } = props
 
   const onLogout = () => {
     const token = getToken()
@@ -27,7 +30,7 @@ function Header() {
     <HeaderWrapper>
       <div className="header">
         <div className="header-menu">
-          <i className="fi-rr-layout-fluid" />
+          <MenuOutlined onClick={onClickIcon} />
         </div>
         <div className="header-appName">
           <span className="header-label">{appName}</span>
@@ -51,6 +54,10 @@ function Header() {
       </div>
     </HeaderWrapper>
   )
+}
+
+Header.propTypes = {
+  onClickIcon: PropTypes.func,
 }
 
 export default Header

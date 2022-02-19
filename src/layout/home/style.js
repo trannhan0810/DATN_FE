@@ -33,6 +33,16 @@ const HomeLayoutStyle = styled.div`
       flex: 14;
       height: 100%;
       display: flex;
+
+      .content-left-fold {
+        display: flex;
+        flex: 3;
+      }
+
+      .content-right-fold {
+        display: flex;
+        flex: 11;
+      }
     }
   }
 `

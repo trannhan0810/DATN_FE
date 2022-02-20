@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-console */
+import React, { useEffect, useRef, useState } from 'react'
 import PropsTypes from 'prop-types'
 import { Col, Row } from 'antd'
 import MeetingPageWrapper from './style'
@@ -13,12 +15,17 @@ import CopyIdButton from './meeting-controller/buttons/CopyIdButton'
 import MessengerButton from './meeting-controller/buttons/MessengerButton'
 import ParticipantButton from './meeting-controller/buttons/ParticipantButton'
 import CallEndButton from './meeting-controller/buttons/CallEndButton'
+import MyVideoItem from './video-grid-item/MyVideoItem'
 import useWindowDimensions from 'shared/hooks/useWindowDimensions'
+import useRouter from 'shared/hooks/useRouter'
 
 const MeetingPage = props => {
   const numOfItem = 23
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21].slice(0, numOfItem)
   const { width } = useWindowDimensions()
+  const { history } = useRouter()
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const [isVideoMuted, setIsVideoMuted] = useState(false)
   const [isAudioMuted, setIsAudioMuted] = useState(false)
@@ -29,8 +36,27 @@ const MeetingPage = props => {
   const [isShowRightVideos, setShowRightVideos] = useState(false)
   const isShowRightPart = isShowMessenger || isShowParticipant || isShowRightVideos
 
-  const videoButtonHandler = () => setIsVideoMuted(!isVideoMuted)
-  const audioButtonHandler = () => setIsAudioMuted(!isAudioMuted)
+  const userVideoRef = useRef(null)
+  const userStream = useRef(null)
+  const videoTrack = useRef(null)
+  const audioTrack = useRef(null)
+
+  const videoButtonHandler = () => {
+    if (userStream.current) {
+      if (userVideoRef.current.srcObject && !isScreenShared) {
+        videoTrack.current.enabled = !videoTrack.current.enabled
+      }
+      setIsVideoMuted(!isVideoMuted)
+    }
+  }
+  const audioButtonHandler = () => {
+    if (userStream.current) {
+      if (userVideoRef.current.srcObject && !isScreenShared) {
+        audioTrack.current.enabled = !audioTrack.current.enabled
+      }
+      setIsVideoMuted(!isAudioMuted)
+    }
+  }
   const shareScreenButtonHandler = () => {
     setIsScreenShared(!isScreenShared)
     if (!isScreenShared) {
@@ -52,18 +78,46 @@ const MeetingPage = props => {
     setShowParticipant(!isShowParticipant)
   }
 
+  const endCall = () => {
+    if (userStream.current) {
+      userStream.current.getTracks().forEach(track => track.stop())
+    }
+    history.push('/classes')
+  }
+
+  const joinInMeeting = () => {
+    setIsLoading(true)
+    setTimeout(() => {
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then(myStream => {
+          setIsLoading(false)
+          userStream.current = myStream
+          console.log(myStream)
+          videoTrack.current = userStream.current.getTracks()[1]
+          audioTrack.current = userStream.current.getTracks()[0]
+          userVideoRef.current.srcObject = myStream
+        })
+        .catch(console.log)
+    }, 1000)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      joinInMeeting()
+    }, 500)
+  }, [])
+
   return (
     <MeetingPageWrapper>
       <div className="meeting-main">
         {(!isShowRightPart || width > 480) && (
           <>
-            {isScreenShared && <VideoGridItem />}
+            {isScreenShared && <MyVideoItem />}
             {!isScreenShared && (
               <div className="meeting-videos">
                 <VideoGrid numOfItem={numOfItem}>
-                  {items.map(id => (
-                    <VideoGridItem key={id} />
-                  ))}
+                  {[<MyVideoItem ref={userVideoRef} key={-1} />, ...items.map(id => <VideoGridItem key={id} />)]}
                 </VideoGrid>
               </div>
             )}
@@ -103,7 +157,7 @@ const MeetingPage = props => {
                 onClick={messengerButtonHandler}
               />
               <ParticipantButton isShowParticipant={isShowParticipant} onClick={participantButtonHandler} />
-              <CallEndButton />
+              <CallEndButton onClick={endCall} />
             </Col>
           </Row>
         </MeetingControllerWrapper>

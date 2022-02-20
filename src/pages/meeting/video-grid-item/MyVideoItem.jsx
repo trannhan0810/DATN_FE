@@ -9,7 +9,7 @@ const MyVideoItem = React.forwardRef((props, ref) => {
     <VideoItem>
       <video
         muted
-        controls
+        controls="hidden"
         playsInline
         autoPlay
         ref={ref}

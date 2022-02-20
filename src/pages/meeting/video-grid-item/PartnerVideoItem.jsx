@@ -16,7 +16,7 @@ const PartnerVideoItem = ({ peer }) => {
 
   return (
     <VideoItem>
-      <video controls playsInline autoPlay ref={videoRef} />
+      <video controls="hidden" playsInline autoPlay ref={videoRef} />
     </VideoItem>
   )
 }

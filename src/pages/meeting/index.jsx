@@ -490,7 +490,7 @@ const MeetingPage = () => {
           <>
             {/* {isScreenShared && <MyVideoItem ref={userVideoRef} />}
             {!isScreenShared && ( */}
-            <div className="meeting-videos">
+            <div className="meeting-videos" style={{ zIndex: 0 }}>
               <VideoGrid numOfItem={numOfItem}>
                 {[
                   <MyVideoItem ref={userVideoRef} key={-1} />,

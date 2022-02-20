@@ -1,61 +1,101 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import VideoGridWrapper from './style'
-import useWindowDimensions from 'shared/hooks/useWindowDimensions'
 
-const VideoGrid = ({ children, numOfItem }) => {
-  const { width } = useWindowDimensions()
-  const maxVideoDisplay = width > 800 ? 12 : 8
-  const peers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-  const numOfVideo = 9
-  const numOfVideoDisplay = Math.min(numOfVideo, maxVideoDisplay)
-  const [numOfColumn, setNumOfColumn] = useState(1)
-  const [numOfRow, setNumOfRow] = useState(numOfVideoDisplay)
-  const displayPeers = peers.slice(0, numOfVideoDisplay)
-  const videoGridRef = useRef(null)
+// This function calculates width and height of the list
+const recalculateLayout = (n, gridWidth, gridHeight) => {
+  let bestRatio = 99999999
+  let bestSize = [1, n]
+  // eslint-disable-next-line no-constant-condition
+  for (let colNum = 1; true; colNum += 1) {
+    const rowNum = Math.ceil(n / colNum)
+    const newRatio = gridWidth / colNum / (gridHeight / rowNum)
+    if (newRatio >= 1 && newRatio <= 16 / 9) {
+      return [colNum, rowNum]
+    }
 
-  // This function calculates width and height of the list
-  const getBestSize = n => {
-    const gridWidth = videoGridRef.current.clientWidth
-    const gridHeight = videoGridRef.current.clientHeight
-    let bestRatio = 99999999
-    let bestSize = [1, n]
-    // eslint-disable-next-line no-constant-condition
-    for (let colNum = 1; true; colNum += 1) {
-      const rowNum = Math.ceil(n / colNum)
-      const newRatio = gridWidth / colNum / (gridHeight / rowNum)
-      if (newRatio >= 1 && newRatio <= 16 / 9) {
-        return [colNum, rowNum]
-      }
-
-      if (Math.abs(newRatio - 4 / 3) < Math.abs(bestRatio - 4 / 3)) {
-        bestRatio = newRatio
-        bestSize = [colNum, rowNum]
-      } else {
-        return bestSize
-      }
+    if (Math.abs(newRatio - 4 / 3) < Math.abs(bestRatio - 4 / 3)) {
+      bestRatio = newRatio
+      bestSize = [colNum, rowNum]
+    } else {
+      return bestSize
     }
   }
+}
 
-  // Get 'width' and 'height' after the initial render and every time the list changes
+function useVideoGridLayout() {
+  const [numOfItems, setNumOfItems] = useState(0)
+  const [numOfCols, setNumOfCols] = useState(1)
+  const [numOfRows, setNumOfRows] = useState(1)
+  const videoGridRef = useRef(null)
+
+  const updateLayout = useCallback(
+    ele => {
+      if (ele != null) {
+        videoGridRef.current = ele
+      }
+      if (numOfItems > 0 && videoGridRef.current) {
+        const gridWidth = videoGridRef.current.clientWidth
+        const gridHeight = videoGridRef.current.clientHeight
+        const [newNumOfCols, newNumOfRows] = recalculateLayout(numOfItems, gridWidth, gridHeight)
+        setNumOfCols(newNumOfCols)
+        setNumOfRows(newNumOfRows)
+      }
+    },
+    [numOfItems],
+  )
+
   useEffect(() => {
-    const [col, row] = getBestSize(numOfItem)
-    if (col !== numOfColumn) {
-      setNumOfColumn(col)
-      setNumOfRow(row)
+    updateLayout()
+    const listener = () => updateLayout()
+    window.addEventListener('resize', listener)
+    return () => {
+      window.removeEventListener('resize', listener)
     }
-  })
+  }, [updateLayout])
+
+  return [numOfCols, numOfRows, setNumOfItems, updateLayout]
+}
+
+const VideoGrid = ({ children, updateLayoutRef, containerClassName = '', itemClassName = '' }) => {
+  const [numOfCols, numOfRows, setNumOfItems, updateLayout] = useVideoGridLayout()
+
+  useEffect(() => {
+    setNumOfItems(React.Children.count(children))
+  }, [children])
+
+  useEffect(() => {
+    if (updateLayoutRef) {
+      // eslint-disable-next-line no-param-reassign
+      updateLayoutRef.current = () => updateLayout()
+    }
+    return () => {
+      if (updateLayoutRef) {
+        // eslint-disable-next-line no-param-reassign
+        updateLayoutRef.current = undefined
+      }
+    }
+  }, [updateLayout, updateLayoutRef])
 
   return (
-    <VideoGridWrapper ref={videoGridRef} style={{ flex: numOfColumn }}>
-      {children.map((child, i) => (
+    <VideoGridWrapper
+      ref={updateLayout}
+      className={containerClassName}
+      style={{
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexFlow: 'row wrap',
+        flex: numOfCols,
+      }}
+    >
+      {React.Children.map(children, child => (
         <div
-          key={displayPeers[i]}
-          className="grid-item"
+          className={`grid-item ${itemClassName}`}
           style={{
-            flexBasis: `${Math.floor(100 / numOfColumn)}%`,
-            height: `${Math.floor(100 / numOfRow)}%`,
+            flex: '0 0 1',
+            flexBasis: `${Math.floor(100 / numOfCols)}%`,
+            height: `${Math.floor(100 / numOfRows)}%`,
           }}
         >
           {child}
@@ -66,8 +106,10 @@ const VideoGrid = ({ children, numOfItem }) => {
 }
 
 VideoGrid.propTypes = {
-  numOfItem: PropTypes.number,
   children: PropTypes.node,
+  containerClassName: PropTypes.string,
+  itemClassName: PropTypes.string,
+  updateLayoutRef: PropTypes.shape({ current: PropTypes.func }),
 }
 
 export default VideoGrid

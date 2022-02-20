@@ -8,7 +8,7 @@ import './right-fold.css'
 import { v1 as uuid } from 'uuid'
 import PropTypes from 'prop-types'
 import { getCurrentUser } from 'core/currentUser'
-import { createChat, createUser, deleteChat } from 'pages/video-chat/apis'
+import { createChat, createUser, deleteChat } from 'pages/meeting/apis'
 import { showError } from 'core/tools'
 import { checkExistMeeting, createNewMeeting } from 'api/meeting'
 

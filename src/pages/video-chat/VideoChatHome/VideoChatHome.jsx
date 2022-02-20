@@ -55,7 +55,7 @@ const VideoChatHome = props => {
         if (response === 'success') {
           setLoading(false)
           props.history.push({
-            pathname: `/videochat/room/${roomId}`,
+            pathname: `/meeting/room/${roomId}`,
             state: { authorised: true, admin: true },
           })
         } else {
@@ -95,7 +95,7 @@ const VideoChatHome = props => {
         setLink('')
         setLoading(false)
         props.history.push({
-          pathname: `/videochat/room/${roomId}`,
+          pathname: `/meeting/room/${roomId}`,
           state: { authorised: true, admin: false },
         })
       }

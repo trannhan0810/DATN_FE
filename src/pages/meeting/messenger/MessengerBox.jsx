@@ -1,48 +1,71 @@
 import { Close, Send } from '@mui/icons-material'
-import React from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import MessengerWrapper from './style'
+import { formatTime } from 'shared/utils/date'
 
-const MessengerBox = () => {
+const MessengerBox = ({ sendMsg, messageList, closeMessenger }) => {
+  const [msg, setMsg] = useState('')
+
+  const handleChangeMsg = e => {
+    setMsg(e.target.value)
+  }
+
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      sendMsg(msg)
+      setMsg('')
+    }
+  }
+
+  const handleSendMsg = () => {
+    if (msg.length > 0) sendMsg(msg)
+    setMsg('')
+  }
+
   return (
     <MessengerWrapper>
       <div className="mess-container">
         <div className="mess-header">
           <h3>Messenger</h3>
-          <Close />
+          <Close onClick={closeMessenger} />
         </div>
         <div className="mess-body">
-          <div className="chat-block">
-            <div className="sender">
-              You <small>12:00 AM</small>
-            </div>
-            <p className="msg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-              ea commodo consequat.
-            </p>
-          </div>
-          <div className="chat-block">
-            <div className="sender">
-              Me <small>13:00 AM</small>
-            </div>
-            <p className="msg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-              ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-              laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
+          {messageList.map(item => {
+            return (
+              <div key={item.time} className="chat-block">
+                <div className="sender">
+                  {item.user} <small>{formatTime(item.time)}</small>
+                </div>
+                <p className="msg">{item.msg}</p>
+              </div>
+            )
+          })}
         </div>
         <div className="mess-footer">
-          <input />
-          <Send />
+          <input
+            placeholder="Send a message to everyone"
+            value={msg}
+            onChange={e => handleChangeMsg(e)}
+            onKeyDown={e => handleKeyDown(e)}
+          />
+          <Send disabled={!(msg.length > 0)} onClick={handleSendMsg} />
         </div>
       </div>
     </MessengerWrapper>
   )
+}
+
+MessengerBox.propTypes = {
+  sendMsg: PropTypes.func,
+  messageList: PropTypes.arrayOf(
+    PropTypes.shape({
+      time: PropTypes.number,
+      user: PropTypes.string,
+      msg: PropTypes.string,
+    }),
+  ),
+  closeMessenger: PropTypes.func,
 }
 
 export default MessengerBox

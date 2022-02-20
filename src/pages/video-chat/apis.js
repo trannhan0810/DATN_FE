@@ -44,14 +44,11 @@ export const deleteChat = async (admin, chatId) => {
 }
 
 export const addUser = async (userName, chatId) => {
-  try {
-    await request.post('/add_user', {
-      username: userName,
-      chatId,
-    })
-  } catch (error) {
-    // console.log(error);
-  }
+  console.log('add_user', userName, chatId)
+  await request.post('/add_user', {
+    username: userName,
+    chatId,
+  })
 }
 
 export const getChatMsgs = async roomId => {

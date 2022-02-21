@@ -13,16 +13,19 @@ const Class = () => {
   const [loading, setLoading] = useState(false)
   const [classInfo, setClassInfo] = useState({})
 
-  useEffect(async () => {
+  useEffect(() => {
     setLoading(true)
-    try {
-      const data = await getClassById(id)
-      setClassInfo(data)
-    } catch {
-      showError('Load data fail')
-    } finally {
-      setLoading(false)
+    const getClassData = async () => {
+      try {
+        const data = await getClassById(id)
+        setClassInfo(data)
+      } catch {
+        showError('Load data fail')
+      } finally {
+        setLoading(false)
+      }
     }
+    getClassData()
   }, [])
 
   return <HomeLayout LeftFold={<ClassInfo classInfo={classInfo} />} RightFold={<RightFold />} />

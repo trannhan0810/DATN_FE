@@ -1,12 +1,14 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { VideoCameraOutlined } from '@ant-design/icons'
-import { Tooltip } from 'antd'
+import { Avatar, Tooltip } from 'antd'
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import './right-fold.css'
 import { v1 as uuid } from 'uuid'
 import PropTypes from 'prop-types'
+import { Send } from '@mui/icons-material'
+import ClassMessenger from '../component/ClassMessenger'
+import ClassInfoLayoutWrapper from './style'
 import { getCurrentUser } from 'core/currentUser'
 import { createChat, createUser, deleteChat } from 'pages/meeting/apis'
 import { showError } from 'core/tools'
@@ -91,32 +93,24 @@ function RightFold(props) {
   }
 
   return (
-    <div className="rightFold">
+    <ClassInfoLayoutWrapper>
       <div className="rightFold-heading">
-        <div>
-          <label className="heading-label">Classes</label>
-          <label className="heading-sub-label">Chat</label>
-          <label className="heading-sub-label">Member</label>
-        </div>
-        <div className="contact-search">
-          <input className="no-outline" placeholder="Find a class" />
-          <div className="contact-search-icon">
-            <i className="fi-rr-search" />
+        <div className="rightFold-heading-left">
+          <div className="rightFold-class-name">Classes</div>
+          <div className="rightFold-nav">
+            <div className="rightFold-nav-item active">Chat</div>
+            <div className="rightFold-nav-item">Member</div>
           </div>
         </div>
-        <div className="flex justify-end btn-list">
+        <div className="rightFold-heading-right">
           <Tooltip className="add-button" onClick={startNewMeeting}>
             <VideoCameraOutlined className="add-icon" />
             <label className="add-label">Meet</label>
           </Tooltip>
         </div>
       </div>
-      {/* <div className="contact-list">
-        {contacts.map(item => {
-          return <ContactCard key={item.id} item={item} />
-        })}
-      </div> */}
-    </div>
+      <ClassMessenger className="class-messenger" />
+    </ClassInfoLayoutWrapper>
   )
 }
 

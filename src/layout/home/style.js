@@ -8,7 +8,7 @@ const HomeLayoutStyle = styled.div`
 
   .home-header {
     width: 100%;
-    flex: 0 0 50px;
+    flex: 0 0 64px;
     //max-height: 50px;
   }
 

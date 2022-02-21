@@ -7,15 +7,15 @@ const ClassInfoWrapper = styled.div`
   flex-direction: column;
   background: #ebebeb;
   box-shadow: 5px 0px 6px #dbdbdb, -5px 0px 6px #dbdbdb;
-  overflow-y: scroll;
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  overflow-y: hidden;
+  // /* Hide scrollbar for IE, Edge and Firefox */
+  // -ms-overflow-style: none; /* IE and Edge */
+  // scrollbar-width: none; /* Firefox */
 
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  // /* Hide scrollbar for Chrome, Safari and Opera */
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
 
   .class-info-header {
     flex: 0 0 90px;
@@ -56,7 +56,7 @@ const ClassInfoWrapper = styled.div`
   .class-info-bottom {
     flex: 0 0 50%;
     width: 100%;
-    background-color: white;
+    //background-color: white;
   }
 `
 

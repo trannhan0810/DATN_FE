@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import { Redirect, useLocation } from 'react-router'
 import { LeftOutlined, UserAddOutlined } from '@ant-design/icons'
 import classImg from '../../../assets/images/class-img.jpg'
-import './left-fold.css'
 import ClassInfoWrapper from './style'
 import useRouter from 'shared/hooks/useRouter'
 
@@ -42,45 +41,6 @@ function LeftFold(props) {
         </div>
         <div className="class-info-bottom" />
       </ClassInfoWrapper>
-      {/* <div className="leftFold">
-        {redirect.length > 1 && <Redirect to={redirect} />}
-        <div className="leftFold-top">
-          <div className="leftFold-header">
-            <Tooltip title="All classes" onClick={backToAllClasses}>
-              <LeftOutlined />
-            </Tooltip>
-            <label className="menu-label">Class</label>
-          </div>
-          <img className="class-img" src={classDetail.avatar} alt="" />
-          <h1 className="class-name">{classDetail.name}</h1>
-        </div>
-
-        <div className="leftFold-bottom">
-          <div className="flex space-between">
-            <div className="justify-left flex">
-              <label className="dialer-label">Member ({classDetail.numOfMember}) </label>
-            </div>
-            <div className="justify-right flex">
-              <Tooltip title="Add member">
-                <Button className="add-member-btn">
-                  <UserAddOutlined />
-                </Button>
-              </Tooltip>
-            </div>
-          </div>
-
-          <div className="dialer-search">
-            <input placeholder="Type a name" style={{ width: '100%' }} />
-          </div>
-          <div className="dialer-suggested">
-            <div className="suggested-list">
-              {dialerList.map(item => {
-                return <MemberItem key={item.id} item={item} />
-              })}
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   )
 }

@@ -5,10 +5,13 @@ import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 
 const ClassMessengerWrapper = styled.div`
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-flow: column;
 
   .classMessenger-content {
+    width: 100%;
     flex: 1 1 0;
     border-bottom: 2px solid lightgray;
     overflow-y: scroll;
@@ -71,6 +74,7 @@ const ClassMessengerWrapper = styled.div`
   }
 
   .classMessenger-footer {
+    width: 100%;
     flex: 0 0 96px;
     display: flex;
     align-items: center;
@@ -86,6 +90,7 @@ const ClassMessengerWrapper = styled.div`
 
       input,
       input:focus {
+        width: 0px;
         flex: 1 1 0px;
         padding: 12px;
         border: none;

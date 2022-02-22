@@ -3,59 +3,50 @@ import { isEqual } from 'lodash-es'
 import { convertQueryToParams } from '../utils/query-until'
 import usePagination from './usePagination'
 import { showError, showSuccess } from 'core/tools'
-import { getEmployeeOfQA, assignEmployeeToQA, removeEmployeeOfQA } from 'api/employeeOfQA'
+import { getClassMembers, addClassMember, removeClassMember } from 'api/classMember'
 
-const useEmployeeOfQA = managerId => {
+const useClassMembers = () => {
   const { pageSize, currentPage, sorter, onChangePagination, setCurrentPage } = usePagination()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isUpsert, setIsUpsert] = useState(false)
-  const [users, setUsers] = useState([])
+  const [members, setMembers] = useState([])
   const [totalItems, setTotalItem] = useState(0)
-  const [filters, setFilters] = useState({ ManagerId: managerId })
+  const [filters, setFilters] = useState({})
 
   const onFilters = values => {
-    if (isEqual(values, filters)) {
-      return
+    if (!isEqual(values, filters)) {
+      setFilters(values)
+      setCurrentPage(1)
     }
-    setFilters({ ...values, ManagerId: managerId })
-    setCurrentPage(1)
   }
 
-  // Get Users
-  const getListEmployeeOfQA = useCallback(async () => {
+  const getClassMemberList = useCallback(async () => {
     try {
       setIsLoading(true)
-      const params = convertQueryToParams({
-        pageSize,
-        currentPage,
-        sorter,
-        filters,
-      })
-      const res = await getEmployeeOfQA(params)
-      setUsers(res?.data)
+      const params = convertQueryToParams({ pageSize, currentPage, sorter, filters })
+      const res = await getClassMembers(params)
+      setMembers(res?.data)
       setTotalItem(res?.totalItems)
       setIsLoading(false)
     } catch (error) {
       showError(error)
-      setUsers([])
+      setMembers([])
       setIsLoading(false)
     }
   }, [currentPage, pageSize, filters, sorter])
 
   useEffect(() => {
-    getListEmployeeOfQA()
-  }, [getListEmployeeOfQA])
+    getClassMemberList()
+  }, [getClassMemberList])
 
-  // Create Users
-  const assignEmployee = async values => {
+  const addMember = async values => {
     try {
       setIsUpsert(true)
-      const response = await assignEmployeeToQA(values)
+      const response = await addClassMember(values)
       if (response) {
-        getListEmployeeOfQA()
-        showSuccess(`Đã thêm nhân viên vào danh sách quản lý của QA`)
-        return true
+        getClassMemberList()
+        showSuccess(`Add member successfully`)
+        return response?.data // TODO: Close Modal
       }
     } catch (error) {
       showError(error)
@@ -64,15 +55,19 @@ const useEmployeeOfQA = managerId => {
     }
   }
 
-  // Change Users Status
-  const removeEmployee = async params => {
+  const removeMember = async values => {
     try {
-      const response = await removeEmployeeOfQA(params)
+      setIsUpsert(true)
+      const response = await removeClassMember(values)
       if (response) {
-        getListEmployeeOfQA()
+        getClassMemberList()
+        showSuccess(`Can not remove this member`)
+        return response?.data // TODO: Close Modal
       }
     } catch (error) {
       showError(error)
+    } finally {
+      setIsUpsert(false)
     }
   }
 
@@ -80,14 +75,15 @@ const useEmployeeOfQA = managerId => {
     isLoading,
     isUpsert,
     totalItems,
-    users,
+    members,
     pageSize,
     currentPage,
     onChangePagination,
     setCurrentPage,
     onFilters,
-    assignEmployee,
-    removeEmployee,
+    addMember,
+    removeMember,
   }
 }
-export default useEmployeeOfQA
+
+export default useClassMembers

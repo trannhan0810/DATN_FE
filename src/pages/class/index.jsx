@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import request from '../../core/request'
-import ClassPageWrapper from './style'
-import ClassInfo from './class-info'
+import ClassInfo from './component/class-info'
 import RightFold from './right-fold'
 import HomeLayout from 'layout/home/HomeLayout'
-import { getClassById, getClasses } from 'api/class'
+import { getClassById } from 'api/class'
 import { showError } from 'core/tools'
 
 const Class = () => {
@@ -28,7 +26,7 @@ const Class = () => {
     getClassData()
   }, [])
 
-  return <HomeLayout LeftFold={<ClassInfo classInfo={classInfo} />} RightFold={<RightFold />} />
+  return <HomeLayout LeftFold={<ClassInfo loading={loading} classInfo={classInfo} />} RightFold={<RightFold />} />
 }
 
 export default Class

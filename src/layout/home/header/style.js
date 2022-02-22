@@ -15,6 +15,7 @@ const HeaderWrapper = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 20px;
+    padding: 0px 4px;
   }
 
   .header-menubar {
@@ -55,7 +56,6 @@ const HeaderWrapper = styled.div`
         align-items: center;
         background-color: #e1e1e1;
         padding: 8px 12px;
-        margin-left: 8px;
         border-radius: 6px;
         color: #464775;
 

@@ -8,21 +8,25 @@ import { getClasses } from 'api/class'
 import { showError } from 'core/tools'
 
 const Classes = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [classes, setClasses] = useState([])
-  useEffect(async () => {
-    setLoading(true)
-    try {
-      const data = await getClasses({})
-      setClasses(data.results)
-    } catch {
-      showError('Load data fail')
-    } finally {
-      setLoading(false)
+  useEffect(() => {
+    const getClassList = async () => {
+      setLoading(true)
+      try {
+        const data = await getClasses({})
+        setClasses(data)
+      } catch {
+        showError('Load data fail')
+        setClasses([])
+      } finally {
+        setLoading(false)
+      }
     }
+    getClassList()
   }, [])
 
-  return <HomeLayout isHaveLeftFold={false} RightFold={<RightFold classes={classes} />} />
+  return <HomeLayout isHaveLeftFold={false} RightFold={<RightFold loading={loading} classes={classes} />} />
 }
 
 export default Classes

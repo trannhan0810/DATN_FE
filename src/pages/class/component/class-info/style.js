@@ -51,6 +51,19 @@ const ClassInfoWrapper = styled.div`
       font-weight: 600;
       font-size: 2em;
     }
+
+    .element {
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+    }
+
+    .truncate {
+      display: table-cell;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 
   .class-info-bottom {

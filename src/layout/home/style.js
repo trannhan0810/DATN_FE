@@ -25,6 +25,11 @@ const HomeLayoutStyle = styled.div`
       flex: 1;
       display: flex;
       flex-direction: column;
+      // background-color: #6264a7;
+
+      // .sidebar-icon {
+      //   color: white;
+      // }
     }
 
     .content {
@@ -47,7 +52,7 @@ const HomeLayoutStyle = styled.div`
     }
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 720px) {
     .home-body {
       flex-direction: column-reverse;
 

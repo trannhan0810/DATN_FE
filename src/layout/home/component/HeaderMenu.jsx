@@ -18,9 +18,13 @@ const HeaderMenu = () => {
   }
 
   return (
-    <Menu style={{ minWidth: ' 80px' }}>
-      <Menu.Item disabled>{profile.fullName || 'Noname'}</Menu.Item>
-      <Menu.Item onClick={logout}>Log out</Menu.Item>
+    <Menu className="shadow" style={{ minWidth: ' 320px', borderRadius: '4px' }}>
+      <Menu.Item key="user" disabled>
+        {profile.fullName || 'Noname'}
+      </Menu.Item>
+      <Menu.Item key="logout" onClick={logout}>
+        Log out
+      </Menu.Item>
     </Menu>
   )
 }

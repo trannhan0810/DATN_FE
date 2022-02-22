@@ -30,7 +30,7 @@ function Header(props) {
           <div className="header-profile">
             {/* <span className="header-user-name"> Name </span> */}
             <Avatar className="header-avatar" alt="" src={defaultAvatar} />
-            <Dropdown overlay={<HeaderMenu />} placement="bottomRight">
+            <Dropdown overlay={<HeaderMenu />} trigger={['click']} placement="bottomRight">
               <div className="header-icon">
                 <MoreOutlined rotate={90} className="btn-logout" />
               </div>

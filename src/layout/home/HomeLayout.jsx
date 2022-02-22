@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import HomeLayoutStyle from './style'
-import { SidebarBottom, SidebarData, SidebarMore } from './sidebar/sidebarData'
+import { SidebarData, SidebarMore } from './sidebar/sidebarData'
 import Header from './header/Header'
 import SidebarOption from './sidebar/sidebar-option/SidebarOption'
-import SidebarWrapper from './sidebar/style'
 
 const HomeLayout = props => {
   // eslint-disable-next-line react/destructuring-assignment

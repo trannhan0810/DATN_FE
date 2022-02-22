@@ -117,7 +117,7 @@ const AuthWrapper = styled.div`
     }
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 720px) {
     .full-height {
       .left-side {
         display: none;

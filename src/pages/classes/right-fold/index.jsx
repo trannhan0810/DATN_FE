@@ -7,7 +7,7 @@ import JoinClassModal from './join-class-modal/JoinClassModal'
 import useToggle from 'shared/hooks/useToggle'
 
 function RightFold(props) {
-  const { classes } = props
+  const { classes, loading } = props
   const { isVisible: isJoinClassVisible, onClose: closeJoinClassModal, onOpen: openJoinClassModal } = useToggle()
 
   return (
@@ -39,9 +39,10 @@ function RightFold(props) {
           </div>
         </div>
         <div className="contact-list">
-          {classes.map(item => {
-            return <ContactCard key={item.id} item={item} />
-          })}
+          {!loading &&
+            classes.map(item => {
+              return <ContactCard key={item.id} item={item} />
+            })}
         </div>
       </div>
       <JoinClassModal
@@ -56,6 +57,7 @@ function RightFold(props) {
 }
 
 RightFold.propTypes = {
+  loading: PropTypes.bool,
   classes: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string })),
 }
 

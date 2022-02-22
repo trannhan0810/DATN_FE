@@ -8,7 +8,7 @@ const SidebarOptionWrapper = styled.div`
     align-items: center;
     flex-direction: column;
     padding: 8px 8px;
-    color: #616161;
+    //color: #616161;
     cursor: pointer;
   }
 

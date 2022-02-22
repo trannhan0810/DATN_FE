@@ -8,8 +8,8 @@ export const convertQueryToParams = queryParams => {
   const { pageSize, currentPage, filters, sorter } = queryParams
 
   let params = {
-    PageNumber: currentPage,
-    PageSize: pageSize,
+    pageNumber: currentPage,
+    pageSize,
   }
   // sorter
   if (!isEmpty(sorter)) {

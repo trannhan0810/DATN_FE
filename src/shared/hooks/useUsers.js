@@ -23,7 +23,7 @@ const useUsers = () => {
   }
 
   // Get Users
-  const getUserLists = useCallback(async () => {
+  const getUserList = useCallback(async () => {
     try {
       setIsLoading(true)
       const params = convertQueryToParams({
@@ -44,8 +44,8 @@ const useUsers = () => {
   }, [currentPage, pageSize, filters, sorter])
 
   useEffect(() => {
-    getUserLists()
-  }, [getUserLists])
+    getUserList()
+  }, [getUserList])
 
   // Create Users
   const createUser = async values => {
@@ -53,8 +53,8 @@ const useUsers = () => {
       setIsUpsert(true)
       const response = await postUser(values)
       if (response) {
-        getUserLists()
-        showSuccess(`Tài khoản ${response?.data?.fullName} đã tạo thành công`)
+        getUserList()
+        showSuccess(`Create user successfully`)
         return response?.data // TODO: Close Modal
       }
     } catch (error) {
@@ -77,7 +77,7 @@ const useUsers = () => {
           return item
         })
         setUsers(newUsers)
-        showSuccess(`Thông tin ${response?.data?.fullName} đã cập nhật thành công`)
+        showSuccess(`User's information is successfully update`)
         return response
       }
     } catch (error) {
@@ -99,9 +99,7 @@ const useUsers = () => {
           return item
         })
         setUsers(newLeads)
-        const message = user.isActive
-          ? `Đã ngừng hoạt động tài khoản ${user.fullName} thành công `
-          : `Tài khoản ${user.fullName} đã kích hoạt thành công`
+        const message = user.isActive ? `User is inactive now` : `User is active now`
         showSuccess(message)
         return response
       }

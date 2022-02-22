@@ -1,6 +1,9 @@
 import styled from '@emotion/styled'
 
 const HomeLayoutStyle = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
   width: 100wh;
   height: 100vh;
   display: flex;

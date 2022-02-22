@@ -368,7 +368,7 @@ const MeetingPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(true)
-      socketRef.current = io.connect('http://localhost:3001/')
+      socketRef.current = io.connect(process.env.REACT_APP_SERVER_URL)
       console.log('>>>>connect', socketRef.current)
       if (!location.state.admin) {
         console.log('isNotAdmin')

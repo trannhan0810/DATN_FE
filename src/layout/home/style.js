@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 const HomeLayoutStyle = styled.div`
-  width: 100%;
+  width: 100wh;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -9,39 +9,56 @@ const HomeLayoutStyle = styled.div`
   .home-header {
     width: 100%;
     flex: 0 0 64px;
-    //max-height: 50px;
   }
 
   .home-body {
     width: 100%;
-    flex: 1;
-
-    .home-body-inner {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: row;
-    }
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: row;
 
     .home-sidebar {
-      flex: 1;
       height: 100%;
+      flex: 1;
       display: flex;
+      flex-direction: column;
     }
 
     .content {
-      flex: 14;
       height: 100%;
+      flex: 14;
       display: flex;
 
       .content-left-fold {
-        display: flex;
+        height: 100%;
         flex: 3;
+        @media only screen and (max-width: 720px) {
+          display: none;
+        }
       }
 
       .content-right-fold {
-        display: flex;
+        height: 100%;
         flex: 11;
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .home-body {
+      flex-direction: column-reverse;
+
+      .home-sidebar {
+        width: 100%;
+        height: auto;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .content {
+        width: 100%;
+        flex: 1 1 0;
       }
     }
   }

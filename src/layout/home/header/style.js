@@ -3,76 +3,91 @@ import styled from '@emotion/styled'
 const HeaderWrapper = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
+  background-color: #464775;
+  color: white;
+  padding: 6px 0px;
 
-  .header {
-    width: 100%;
+  .header-logo {
     height: 100%;
-    display: flex;
     flex: 1;
-    background-color: #464775;
-    color: white;
-    padding: 6px 0px;
-  }
-
-  .header-menu {
     display: flex;
-    flex: 1;
     justify-content: center;
     align-items: center;
     font-size: 20px;
   }
 
-  .header-appName {
+  .header-menubar {
+    height: 100%;
+    flex: 14;
     display: flex;
-    flex: 3;
-    justify-content: flex-start;
     align-items: center;
-  }
 
-  @media only screen and (max-width: 400px) {
     .header-appName {
-      display: none;
+      height: 100%;
+      flex: 3 3 0px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: none;
+      font-size: 20px;
+      font-weight: 500;
+      padding-left: 16px;
+
+      @media only screen and (max-width: 720px) {
+        display: none;
+      }
     }
-  }
 
-  .header-label {
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 16px;
-  }
+    .header-controls {
+      height: 100%;
+      flex: 11;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-  .header-rightFold {
-    display: flex;
-    flex: 11;
-    justify-content: space-between;
-  }
+      .header-search {
+        height: 100%;
+        flex: 1 1 0px;
+        display: flex;
+        max-width: 400px;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #e1e1e1;
+        padding: 8px 12px;
+        margin-left: 8px;
+        border-radius: 6px;
+        color: #464775;
 
-  .header-search {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex: 6;
-    background-color: #e1e1e1;
-    padding: 8px;
-    border-radius: 6px;
-    color: #464775;
-  }
+        input {
+          border: none;
+          width: 100%;
+          font-size: 16px;
+          background-color: #e1e1e1;
+          margin-left: 6px;
+          color: #464775;
+        }
+      }
 
-  .header-search input {
-    border: none;
-    width: 100%;
-    font-size: 16px;
-    background-color: #e1e1e1;
-    margin-left: 6px;
-    color: #464775;
-  }
+      .header-profile {
+        height: 100%;
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-left: 8px;
+      }
 
-  .header-profile {
-    display: flex;
-    flex: 4;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 16px;
+      .header-icon {
+        height: 100%;
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        cursor: pointer;
+      }
+    }
   }
 
   .header-user-name {

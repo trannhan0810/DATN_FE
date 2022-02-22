@@ -1,32 +1,29 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { SidebarBottom, SidebarData, SidebarMore } from './sidebarData'
 import SidebarWrapper from './style'
 import SidebarOption from './sidebar-option/SidebarOption'
 
-function Sidebar() {
+function Sidebar(props) {
   const topOptions = SidebarData
   const more = SidebarMore
   const bottomOption = SidebarBottom
+  const { className } = props
 
   return (
-    <SidebarWrapper>
+    <SidebarWrapper className={className}>
       <div className="sidebar-top">
-        <div>
-          {topOptions.map(option => (
-            <SidebarOption key={option.id} option={option} />
-          ))}
-        </div>
-        <div>
-          <SidebarOption option={more} />
-        </div>
+        {topOptions.map(option => (
+          <SidebarOption key={option.id} option={option} />
+        ))}
+        <SidebarOption option={more} />
       </div>
-      {/* <div className="sidebar-bottom">
-        {bottomOption.map(option => {
-          return <SidebarOption key={option.id} option={option} />
-        })}
-      </div> */}
     </SidebarWrapper>
   )
+}
+
+Sidebar.propTypes = {
+  className: PropTypes.string,
 }
 
 export default Sidebar

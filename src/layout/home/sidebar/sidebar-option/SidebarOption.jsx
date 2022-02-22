@@ -5,13 +5,13 @@ import { Tooltip } from 'antd'
 import { Link } from 'react-router-dom'
 import SidebarOptionWrapper from './style'
 
-const SidebarOption = ({ option }) => {
+const SidebarOption = ({ option, className }) => {
   const location = useLocation()
   const isActive = location.pathname === option.path
   const classList = isActive ? 'sidebar-option active' : 'sidebar-option'
 
   return (
-    <SidebarOptionWrapper>
+    <SidebarOptionWrapper className={className}>
       <Tooltip className={classList}>
         <Link to={option.path || '/'}>
           <div className="sidebar-icon">{option.icon}</div>
@@ -23,6 +23,7 @@ const SidebarOption = ({ option }) => {
 }
 
 SidebarOption.propTypes = {
+  className: PropTypes.string,
   option: PropTypes.shape({
     name: PropTypes.string,
     icon: PropTypes.node,

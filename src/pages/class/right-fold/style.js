@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 const ClassInfoLayoutWrapper = styled.div`
+  height: 100%;
   width: 100%;
   padding: 0px 24px 0px 24px;
   background-color: #f5f5f5;
@@ -58,6 +59,8 @@ const ClassInfoLayoutWrapper = styled.div`
 
   .class-messenger {
     flex: 1 1 0px;
+    height: 100%;
+    width: 100%;
   }
 `
 

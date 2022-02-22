@@ -16,8 +16,8 @@ ReactDOM.render(
     <GlobalStyle />
     <ConfigProvider renderEmpty={() => <Empty />} form={formConfig} locale={viVN}>
       <Provider store={store}>
-        <ClearCacheProvider>
-          <App duration={5000} />
+        <ClearCacheProvider duration={5000}>
+          <App />
         </ClearCacheProvider>
       </Provider>
     </ConfigProvider>

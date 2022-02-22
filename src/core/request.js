@@ -34,7 +34,7 @@ request.interceptors.response.use(
   },
   error => {
     if (error?.response?.status === 401) {
-      // removeToken()
+      removeToken()
       window.location.reload()
     }
     if (error?.response?.status === 404) {

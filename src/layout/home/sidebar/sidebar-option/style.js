@@ -7,7 +7,7 @@ const SidebarOptionWrapper = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 8px 8px;
+    padding: 4px 8px;
     //color: #616161;
     cursor: pointer;
   }
@@ -27,6 +27,18 @@ const SidebarOptionWrapper = styled.div`
 
   .sidebar-option:hover {
     color: #7274b7;
+  }
+
+  @media screen and (max-width: 720px) {
+    .active {
+      border-left: 0px;
+      background-color: #6264a7;
+      color: white;
+    }
+
+    .sidebar-option:hover {
+      color: #7274b7;
+    }
   }
 `
 export default SidebarOptionWrapper

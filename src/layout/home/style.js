@@ -40,9 +40,6 @@ const HomeLayoutStyle = styled.div`
       .content-left-fold {
         height: 100%;
         flex: 3;
-        @media only screen and (max-width: 720px) {
-          display: none;
-        }
       }
 
       .content-right-fold {
@@ -62,11 +59,19 @@ const HomeLayoutStyle = styled.div`
         flex: 0 0 auto;
         display: flex;
         flex-direction: row;
+
+        .side-bar-icon {
+          flex: 1;
+        }
       }
 
       .content {
         width: 100%;
         flex: 1 1 0;
+
+        .content-left-fold {
+          display: none;
+        }
       }
     }
   }

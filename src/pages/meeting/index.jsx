@@ -237,6 +237,7 @@ const MeetingPage = () => {
         .getUserMedia({ video: true, audio: true })
         .then(myStream => {
           setIsLoading(false)
+          console.log('my stream', myStream)
           userStream.current = myStream
           videoTrack.current = userStream.current.getTracks()[1]
           audioTrack.current = userStream.current.getTracks()[0]
@@ -321,7 +322,9 @@ const MeetingPage = () => {
             setPeers(otherPeers) // also update the state to remove the left user's video from screen
           })
         })
-        .catch(console.log)
+        .catch(error => {
+          console.log(error)
+        })
     }, 1000)
   }
 

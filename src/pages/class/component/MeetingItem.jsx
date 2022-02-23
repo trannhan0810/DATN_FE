@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import { formatDateTimeDetail } from 'shared/utils/date'
 
-const PostItemWrapper = styled.div`
+const MeetingItemWrapper = styled.div`
   width: 100%;
   height: auto;
   display: flex;
@@ -41,6 +41,14 @@ const PostItemWrapper = styled.div`
       }
     }
 
+    .join-meeting-btn {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 16px 8px;
+    }
+
     .post-msg-content {
       width: 100%;
       min-width: 0px;
@@ -72,37 +80,45 @@ const PostItemWrapper = styled.div`
 `
 
 const MeetingItem = props => {
-  const { className, post, onReply } = props
+  const { className, meeting, onReply } = props
 
   return (
-    <PostItemWrapper className={className}>
+    <MeetingItemWrapper className={className}>
       <div className="post-msg-block">
         <div className="post-msg-header">
           <div className="post-msg-header-left">
-            <Avatar size={48} src={post.avatar} />
+            <Avatar size={48} src={meeting.avatar} />
           </div>
           <div className="post-msg-header-right">
-            <b>{post.userName || post.title}</b>
-            <small> {formatDateTimeDetail(post.time)} </small>
+            <b>{meeting.userName || meeting.title}</b>
+            <small>
+              {formatDateTimeDetail(meeting.startTime)}
+              {' - '}
+              {!meeting.endTime ? 'now' : formatDateTimeDetail(meeting.endTime)}
+            </small>
           </div>
         </div>
-        <div className="post-msg-content">{post.content && <p> {post.content} </p>}</div>
+        {!meeting.endTime && (
+          <div className="join-meeting-btn">
+            <Tooltip className="add-button">Join</Tooltip>
+          </div>
+        )}
       </div>
       <Tooltip onClick={onReply}>
         <div className="post-msg-reply">Reply</div>
       </Tooltip>
-    </PostItemWrapper>
+    </MeetingItemWrapper>
   )
 }
 
 MeetingItem.propTypes = {
   className: PropTypes.string,
-  post: PropTypes.shape({
+  meeting: PropTypes.shape({
     title: PropTypes.string,
-    content: PropTypes.string,
     userName: PropTypes.string,
     avatar: PropTypes.string,
-    time: PropTypes.number,
+    startTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date)]),
+    endTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date)]),
   }),
   onReply: PropTypes.func,
 }

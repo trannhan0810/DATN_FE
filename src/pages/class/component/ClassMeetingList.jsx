@@ -4,7 +4,7 @@ import { Send } from '@mui/icons-material'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { formatDateTimeDetail } from '../../../shared/utils/date'
-import MeetingItem from './PostItem'
+import MeetingItem from './MeetingItem'
 
 const ClassMeetingWrapper = styled.div`
   height: 100%;
@@ -66,13 +66,27 @@ const ClassMeetingWrapper = styled.div`
 `
 
 const ClassMeetingList = ({ className }) => {
-  const [posts, setPosts] = useState([])
+  const [meetings, setMeetings] = useState([])
 
   useEffect(() => {
     const getPosts = () => {
-      setPosts([
-        { id: 1, avatar: null, userName: null, title: 'New channel meeting started', content: null, time: new Date() },
-        { id: 2, avatar: null, userName: null, title: 'New channel meeting started', content: null, time: new Date() },
+      setMeetings([
+        {
+          id: 1,
+          title: 'New channel meeting started',
+          avatar: null,
+          userName: null,
+          startTime: new Date(),
+          endTime: new Date(),
+        },
+        {
+          id: 2,
+          title: 'New channel meeting started',
+          avatar: null,
+          userName: null,
+          startTime: new Date(),
+          endTime: null,
+        },
       ])
     }
     getPosts()
@@ -81,7 +95,8 @@ const ClassMeetingList = ({ className }) => {
   return (
     <ClassMeetingWrapper className={className}>
       <div className="classMessenger-content">
-        {posts.length > 0 && posts.map(post => <MeetingItem className="post-item" key={post.id} post={post} />)}
+        {meetings.length > 0 &&
+          meetings.map(meeting => <MeetingItem className="post-item" key={meeting.id} meeting={meeting} />)}
       </div>
       <div className="classMessenger-footer">
         <div className="send-msg-form">

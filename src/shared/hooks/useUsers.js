@@ -33,8 +33,8 @@ const useUsers = () => {
         filters,
       })
       const res = await getUsers(params)
-      setUsers(res?.data)
-      setTotalItem(res?.totalItems)
+      setUsers(res?.results)
+      setTotalItem(res?.total)
       setIsLoading(false)
     } catch (error) {
       showError(error)

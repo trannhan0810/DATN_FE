@@ -4,9 +4,9 @@ import { Send } from '@mui/icons-material'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { formatDateTimeDetail } from '../../../shared/utils/date'
-import PostItem from './PostItem'
+import MeetingItem from './PostItem'
 
-const ClassMessengerWrapper = styled.div`
+const ClassMeetingWrapper = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -18,7 +18,7 @@ const ClassMessengerWrapper = styled.div`
     border-bottom: 2px solid lightgray;
     overflow-y: scroll;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     padding: 8px;
 
     .post-item {
@@ -65,32 +65,23 @@ const ClassMessengerWrapper = styled.div`
   }
 `
 
-const ClassMessenger = ({ className }) => {
+const ClassMeetingList = ({ className }) => {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
     const getPosts = () => {
       setPosts([
         { id: 1, avatar: null, userName: null, title: 'New channel meeting started', content: null, time: new Date() },
-        {
-          id: 2,
-          avatar: null,
-          userName: 'Tran Nhan',
-          title: null,
-          content:
-            'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
-          time: new Date(),
-          replies: [{ id: 4, userName: 'John', msg: 'iansoksa ioana akn', time: new Date() }],
-        },
+        { id: 2, avatar: null, userName: null, title: 'New channel meeting started', content: null, time: new Date() },
       ])
     }
     getPosts()
   }, [])
 
   return (
-    <ClassMessengerWrapper className={className}>
+    <ClassMeetingWrapper className={className}>
       <div className="classMessenger-content">
-        {posts.length > 0 && posts.map(post => <PostItem className="post-item" key={post.id} post={post} />)}
+        {posts.length > 0 && posts.map(post => <MeetingItem className="post-item" key={post.id} post={post} />)}
       </div>
       <div className="classMessenger-footer">
         <div className="send-msg-form">
@@ -98,12 +89,12 @@ const ClassMessenger = ({ className }) => {
           <Send />
         </div>
       </div>
-    </ClassMessengerWrapper>
+    </ClassMeetingWrapper>
   )
 }
 
-ClassMessenger.propTypes = {
+ClassMeetingList.propTypes = {
   className: PropTypes.string,
 }
 
-export default ClassMessenger
+export default ClassMeetingList

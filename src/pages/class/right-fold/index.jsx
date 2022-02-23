@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import { Send } from '@mui/icons-material'
 import ClassMessenger from '../component/ClassMessenger'
 import ClassMemberList from '../component/ClassMemberList'
+import ClassMeetingList from '../component/ClassMeetingList'
 import ClassInfoLayoutWrapper from './style'
 import { getCurrentUser } from 'core/currentUser'
 import { createChat, createUser, deleteChat } from 'pages/meeting/apis'
@@ -95,7 +96,7 @@ function RightFold(props) {
 
   const tabData = [
     { displayText: 'Chat', component: <ClassMessenger /> },
-    { displayText: 'Meetings', component: <div /> },
+    { displayText: 'Meetings', component: <ClassMeetingList /> },
     { displayText: 'Members', component: <ClassMemberList /> },
     { displayText: 'Setting', component: <div /> },
   ]

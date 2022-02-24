@@ -1,5 +1,6 @@
 import { DeleteOutline, Edit, VisibilitySharp } from '@mui/icons-material'
 import { Avatar, Tooltip } from 'antd'
+import InitialsAvatar from 'react-initials-avatar'
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
@@ -44,7 +45,7 @@ const UserItem = props => {
   return (
     <UserItemWrapper className={className}>
       <div className="avatar-container">
-        <Avatar src={user.avatar} size={48} />
+        {user.avatar ? <Avatar size={48} src={user.avatar} /> : <InitialsAvatar name={user.fullName || ''} />}
       </div>
       <div className="user-info">
         <b className="user-name">{user.fullName}</b>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import ClassInfo from './component/class-info'
-import RightFold from './right-fold'
+import ClassSummaryCard from './class-summary/ClassSummaryCard'
+import ClassDetailCard from './class-detail/ClassDetailCard'
 import HomeLayout from 'layout/home/HomeLayout'
-import { getClassById } from 'api/class'
+import { getClass } from 'api/class'
 import { showError } from 'core/tools'
 
 const Class = () => {
@@ -15,7 +15,7 @@ const Class = () => {
     setLoading(true)
     const getClassData = async () => {
       try {
-        const data = await getClassById(id)
+        const data = await getClass(id)
         setClassInfo(data)
       } catch {
         showError('Load data fail')
@@ -26,7 +26,12 @@ const Class = () => {
     getClassData()
   }, [])
 
-  return <HomeLayout LeftFold={<ClassInfo loading={loading} classInfo={classInfo} />} RightFold={<RightFold />} />
+  return (
+    <HomeLayout
+      LeftFold={<ClassSummaryCard loading={loading} classInfo={classInfo} />}
+      RightFold={<ClassDetailCard />}
+    />
+  )
 }
 
 export default Class

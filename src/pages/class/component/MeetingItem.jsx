@@ -1,4 +1,5 @@
 import { Avatar, Tooltip } from 'antd'
+import InitialsAvatar from 'react-initials-avatar'
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
@@ -87,7 +88,7 @@ const MeetingItem = props => {
       <div className="post-msg-block">
         <div className="post-msg-header">
           <div className="post-msg-header-left">
-            <Avatar size={48} src={meeting.avatar} />
+            {meeting.avatar ? <Avatar size={48} src={meeting.avatar} /> : <InitialsAvatar name="Meeting" />}
           </div>
           <div className="post-msg-header-right">
             <b>{meeting.userName || meeting.title}</b>

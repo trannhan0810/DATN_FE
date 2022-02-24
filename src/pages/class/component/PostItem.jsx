@@ -1,8 +1,8 @@
 import { Avatar, Tooltip } from 'antd'
+import InitialsAvatar from 'react-initials-avatar'
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-import moment from 'moment'
 import { formatDateTimeDetail } from 'shared/utils/date'
 
 const PostItemWrapper = styled.div`
@@ -80,7 +80,7 @@ const PostItem = props => {
       <div className="post-msg-block">
         <div className="post-msg-header">
           <div className="post-msg-header-left">
-            <Avatar size={48} src={post.avatar} />
+            {post.avatar ? <Avatar size={48} src={post.avatar} /> : <InitialsAvatar name={post.userName || ''} />}
           </div>
           <div className="post-msg-header-right">
             <b>{post.userName || post.title}</b>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar } from 'antd'
 import { Send } from '@mui/icons-material'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-import { formatDateTimeDetail } from '../../../shared/utils/date'
 import MeetingItem from './MeetingItem'
 
 const ClassMeetingWrapper = styled.div`

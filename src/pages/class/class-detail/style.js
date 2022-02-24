@@ -47,4 +47,21 @@ const ClassInfoLayoutWrapper = styled.div`
   }
 `
 
+const ClassInfoHeader = styled.div`
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .rightFold-class-name {
+    display: flex;
+    align-items: center;
+    flex: 0 0 50px;
+    font-size: 30px;
+    font-weight: 600;
+  }
+`
+
 export default ClassInfoLayoutWrapper
+export { ClassInfoHeader }

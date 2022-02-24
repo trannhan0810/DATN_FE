@@ -3,6 +3,7 @@ import React from 'react'
 import { Global, css } from '@emotion/react'
 import emotionNormalize from 'emotion-normalize'
 import { CLASS_UTILITY } from './shared/utils/css'
+import 'react-initials-avatar/lib/ReactInitialsAvatar.css'
 
 const GlobalStyle = props => {
   return (

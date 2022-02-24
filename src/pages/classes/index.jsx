@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FlareSharp } from '@mui/icons-material'
 import ClassesPageWrapper from './style'
 import RightFold from './right-fold'
-import { ClassList } from './classList'
+import ClassListCard from './class-list/ClassListCard'
 import HomeLayout from 'layout/home/HomeLayout'
 import { getClasses } from 'api/class'
 import { showError } from 'core/tools'
@@ -26,7 +26,12 @@ const Classes = () => {
     getClassList()
   }, [])
 
-  return <HomeLayout isHaveLeftFold={false} RightFold={<RightFold loading={loading} classes={classes} />} />
+  return (
+    <HomeLayout
+      LeftFold={<ClassListCard loading={loading} classes={classes} />}
+      RightFold={<RightFold loading={loading} classes={classes} />}
+    />
+  )
 }
 
 export default Classes

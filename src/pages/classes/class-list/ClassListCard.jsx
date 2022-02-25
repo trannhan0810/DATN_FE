@@ -8,6 +8,7 @@ import ClassListCardWrapper, { ClassListItem } from './style'
 import FoldCard from 'shared/components/fold-card/FoldCard'
 import EllipsisFlexText from 'shared/components/EllipsisFlexText'
 import useRouter from 'shared/hooks/useRouter'
+import SearchBarHeader from 'shared/components/SearchBarHeader'
 
 const ClassListCard = props => {
   const { myClasses, isLoading } = useClassesMe()
@@ -18,18 +19,13 @@ const ClassListCard = props => {
   const { history } = useRouter()
 
   const Header = (
-    <div className="search-header">
-      <div className="search-bar">
-        {isSearch ? (
-          <input ref={searchInputRef} className="search-bar" placeholder="Type something to search" />
-        ) : (
-          'All Class'
-        )}
-      </div>
-      <Tooltip className="search-icon" onClick={() => setIsSearch(!isSearch)}>
-        {isSearch ? <Close /> : <Search />}
-      </Tooltip>
-    </div>
+    <SearchBarHeader
+      title="All Class"
+      searchPlaceHolder="Type something to search"
+      isSearch={isSearch}
+      setIsSearch={setIsSearch}
+      searchInputRef={searchInputRef}
+    />
   )
 
   const Content = (

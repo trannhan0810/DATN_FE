@@ -4,31 +4,6 @@ const ClassListCardWrapper = styled.div`
   height: 100%;
   width: 100%;
 
-  .search-header {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .search-icon {
-      flex: 0 0 auto;
-      cursor: pointer;
-    }
-
-    .search-bar {
-      over-flow: none;
-      flex: 1 1 0px;
-      font-size: 18px;
-
-      input {
-        background-color: transparent;
-        border: none;
-        outline: none;
-      }
-    }
-  }
-
   .class-list-content {
     width: 100%;
     height: 100%;

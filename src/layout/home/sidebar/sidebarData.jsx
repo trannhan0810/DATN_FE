@@ -1,37 +1,26 @@
 import { GroupOutlined } from '@ant-design/icons'
+import { ClassOutlined, ForumOutlined, VoiceChatOutlined } from '@mui/icons-material'
 import React from 'react'
 
 export const SidebarData = [
-  // {
-  //   id: 1,
-  //   name: 'Activity',
-  //   path: '/activity',
-  //   icon: <i className="fi-rr-bell" />,
-  // },
   {
-    id: 2,
+    id: 1,
     name: 'Chat',
     path: '/chat',
-    icon: <i className="fi-rr-comment" />,
+    icon: <ForumOutlined />,
+  },
+  {
+    id: 2,
+    name: 'Meeting',
+    path: '/meetingHome',
+    icon: <VoiceChatOutlined />,
   },
   {
     id: 3,
     name: 'Class',
     path: '/classes',
-    icon: <GroupOutlined />,
+    icon: <ClassOutlined />,
   },
-  // {
-  //   id: 4,
-  //   name: 'Assignments',
-  //   path: '/assignments',
-  //   icon: <i className="fi-rr-backpack" />,
-  // },
-  // {
-  //   id: 5,
-  //   name: 'Calender',
-  //   path: '/calender',
-  //   icon: <i className="fi-rr-calendar" />,
-  // },
   {
     id: 6,
     name: 'Calls',

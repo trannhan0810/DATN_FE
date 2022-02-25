@@ -10,28 +10,8 @@ import { showError } from 'core/tools'
 const Classes = () => {
   const [loading, setLoading] = useState(true)
   const [classes, setClasses] = useState([])
-  useEffect(() => {
-    const getClassList = async () => {
-      setLoading(true)
-      try {
-        const data = await getClasses({})
-        setClasses(data)
-      } catch {
-        showError('Load data fail')
-        setClasses([])
-      } finally {
-        setLoading(false)
-      }
-    }
-    getClassList()
-  }, [])
 
-  return (
-    <HomeLayout
-      LeftFold={<ClassListCard loading={loading} classes={classes} />}
-      RightFold={<RightFold loading={loading} classes={classes} />}
-    />
-  )
+  return <HomeLayout LeftFold={<ClassListCard />} RightFold={<RightFold loading={loading} classes={classes} />} />
 }
 
 export default Classes

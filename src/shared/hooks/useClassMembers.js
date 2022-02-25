@@ -3,7 +3,7 @@ import { isEqual } from 'lodash-es'
 import { convertQueryToParams } from '../utils/query-until'
 import usePagination from './usePagination'
 import { showError, showSuccess } from 'core/tools'
-import { getClassMembers, addClassMember, removeClassMember } from 'api/classMember'
+import { getClassMembers, addClassMember, removeClassMember } from 'api/class'
 
 const useClassMembers = () => {
   const { pageSize, currentPage, sorter, onChangePagination, setCurrentPage } = usePagination()
@@ -12,6 +12,7 @@ const useClassMembers = () => {
   const [members, setMembers] = useState([])
   const [totalItems, setTotalItem] = useState(0)
   const [filters, setFilters] = useState({})
+  const [classId, setClassId] = useState(null)
 
   const onFilters = values => {
     if (!isEqual(values, filters)) {
@@ -21,17 +22,19 @@ const useClassMembers = () => {
   }
 
   const getClassMemberList = useCallback(async () => {
-    try {
-      setIsLoading(true)
-      const params = convertQueryToParams({ pageSize, currentPage, sorter, filters })
-      const res = await getClassMembers(params)
-      setMembers(res?.data)
-      setTotalItem(res?.totalItems)
-      setIsLoading(false)
-    } catch (error) {
-      showError(error)
-      setMembers([])
-      setIsLoading(false)
+    if (classId) {
+      try {
+        setIsLoading(true)
+        const params = convertQueryToParams({ pageSize, currentPage, sorter, filters })
+        const res = await getClassMembers(params)
+        setMembers(res?.data)
+        setTotalItem(res?.totalItems)
+        setIsLoading(false)
+      } catch (error) {
+        showError(error)
+        setMembers([])
+        setIsLoading(false)
+      }
     }
   }, [currentPage, pageSize, filters, sorter])
 

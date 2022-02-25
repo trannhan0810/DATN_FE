@@ -1,19 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Close, More, MoreHorizOutlined, MoreOutlined, Search } from '@mui/icons-material'
-import { Avatar, Tooltip, Typography } from 'antd'
+import { CallToAction, Close, MoreHorizOutlined, Search } from '@mui/icons-material'
+import { Avatar, Tooltip } from 'antd'
 import InitialsAvatar from 'react-initials-avatar'
 import PropTypes from 'prop-types'
-import Text from 'antd/lib/typography/Text'
+import useClassesMe from '../../../shared/hooks/useClassesMe'
 import ClassListCardWrapper, { ClassListItem } from './style'
 import FoldCard from 'shared/components/fold-card/FoldCard'
 import EllipsisFlexText from 'shared/components/EllipsisFlexText'
+import useRouter from 'shared/hooks/useRouter'
 
 const ClassListCard = props => {
-  const { classes, loading } = props
+  const { myClasses, isLoading } = useClassesMe()
   const [allClasses, setAllClasses] = useState([])
   const [filterClasses, setFilterClasses] = useState([])
   const [isSearch, setIsSearch] = useState(false)
   const searchInputRef = useRef(null)
+  const { history } = useRouter()
 
   const Header = (
     <div className="search-header">
@@ -34,7 +36,7 @@ const ClassListCard = props => {
     <div className="class-list-content">
       <div className="class-list-container">
         {filterClasses.map(classItem => (
-          <ClassListItem key={classItem.id}>
+          <ClassListItem key={classItem.id} onClick={() => history.push(`/classes/${classItem.id}`)}>
             <div className="class-list-item-avatar">
               {classItem.avatar ? (
                 <Avatar size={48} src={classItem.avatar} shape="square" />
@@ -55,11 +57,11 @@ const ClassListCard = props => {
   )
 
   useEffect(() => {
-    if (!loading) {
-      setAllClasses(classes)
-      setFilterClasses(classes)
+    if (!isLoading) {
+      setAllClasses(myClasses)
+      setFilterClasses(myClasses)
     }
-  }, [loading])
+  }, [isLoading])
 
   return (
     <ClassListCardWrapper>
@@ -69,14 +71,14 @@ const ClassListCard = props => {
 }
 
 ClassListCard.propTypes = {
-  classes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      name: PropTypes.string,
-      avatar: PropTypes.string,
-    }),
-  ),
-  loading: PropTypes.bool,
+  // classes: PropTypes.arrayOf(
+  //   PropTypes.shape({
+  //     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  //     name: PropTypes.string,
+  //     avatar: PropTypes.string,
+  //   }),
+  // ),
+  // loading: PropTypes.bool,
 }
 
 export default ClassListCard

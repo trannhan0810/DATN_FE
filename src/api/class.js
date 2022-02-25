@@ -2,6 +2,8 @@ import request from 'core/request'
 
 export const getClasses = params => request.get(`api/v1/classes`, { params })
 
+export const getClassesMe = params => request.get(`api/v1/classes/me`, { params })
+
 export const getClass = id => request.get(`api/v1/classes/${id}`)
 
 export const postClass = data =>
@@ -19,3 +21,10 @@ export const putClass = (id, data) =>
   })
 
 export const deleteClass = id => request.delete(`api/v1/classes/${id}`)
+
+export const getClassMembers = (id, params) => request.get(`api/v1/classes/${id}/members`, { params })
+
+export const addClassMember = ({ id, userId, isOwner }) =>
+  request.post(`api/v1/classes/${id}/members`, { userId, isOwner })
+
+export const removeClassMember = ({ id, userId }) => request.delete(`api/v1/classes/${id}/members`, { userId })

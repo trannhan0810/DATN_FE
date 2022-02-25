@@ -10,7 +10,7 @@ const useClasses = () => {
 
   const [isLoading, setIsLoading] = useState(false)
   const [isUpsert, setIsUpsert] = useState(false)
-  const [Classes, setClasses] = useState([])
+  const [classes, setClasses] = useState([])
   const [totalItems, setTotalItem] = useState(0)
   const [filters, setFilters] = useState({})
 
@@ -70,7 +70,7 @@ const useClasses = () => {
       setIsUpsert(true)
       const response = await putClass(values)
       if (response) {
-        const newClasses = Classes.map(item => {
+        const newClasses = classes.map(item => {
           if (item.id === response.data.id) {
             return { ...item, ...response?.data }
           }
@@ -91,7 +91,7 @@ const useClasses = () => {
     isLoading,
     isUpsert,
     totalItems,
-    Classes,
+    classes,
     pageSize,
     currentPage,
     onChangePagination,

@@ -67,6 +67,7 @@ const ClassMemberList = ({ className }) => {
 
 ClassMemberList.propTypes = {
   className: PropTypes.string,
+  // classId: PropTypes.string,
 }
 
 export default ClassMemberList

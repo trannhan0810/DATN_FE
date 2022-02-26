@@ -15,7 +15,7 @@ import EllipsisFlexText from 'shared/components/EllipsisFlexText'
 
 function ClassDetailCard(props) {
   const { classInfo, loading } = props
-  const { handleExistingMeetJoin, startNewMeeting } = useMeeting()
+  const { handleExistingMeetJoin, startNewMeeting, startMeeting } = useMeeting()
 
   const tabData = [
     { displayText: 'Chat', component: <ClassMessenger loading={loading} classId={classInfo.id} /> },
@@ -29,7 +29,7 @@ function ClassDetailCard(props) {
       <div className="rightFold-class-name">
         <EllipsisFlexText>Classes</EllipsisFlexText>
       </div>
-      <Tooltip onClick={startNewMeeting}>
+      <Tooltip onClick={() => startMeeting(classInfo.id)}>
         <button type="button" className="add-button" style={{ cursor: 'pointer' }}>
           <VideoCameraOutlined /> Meet
         </button>

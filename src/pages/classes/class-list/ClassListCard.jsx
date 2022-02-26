@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { CallToAction, Close, MoreHorizOutlined, Search } from '@mui/icons-material'
-import { Avatar, Tooltip } from 'antd'
+import { Avatar, Empty, Tooltip } from 'antd'
 import InitialsAvatar from 'react-initials-avatar'
 import PropTypes from 'prop-types'
 import useClassesMe from '../../../shared/hooks/useClassesMe'
@@ -31,6 +31,12 @@ const ClassListCard = props => {
   const Content = (
     <div className="class-list-content">
       <div className="class-list-container">
+        {!isLoading && filterClasses.length === 0 && (
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {Empty.PRESENTED_IMAGE_DEFAULT}
+            <h2> Not join any class</h2>{' '}
+          </div>
+        )}
         {filterClasses.map(classItem => (
           <ClassListItem key={classItem.id} onClick={() => history.push(`/classes/${classItem.id}`)}>
             <div className="class-list-item-avatar">

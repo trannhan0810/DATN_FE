@@ -81,7 +81,7 @@ const MeetingItemWrapper = styled.div`
 `
 
 const MeetingItem = props => {
-  const { className, meeting, onReply } = props
+  const { className, meeting, onReply, onJoinMeeting } = props
 
   return (
     <MeetingItemWrapper className={className}>
@@ -101,7 +101,9 @@ const MeetingItem = props => {
         </div>
         {!meeting.endTime && (
           <div className="join-meeting-btn">
-            <Tooltip className="add-button">Join</Tooltip>
+            <Tooltip className="add-button" onClick={onJoinMeeting}>
+              Join
+            </Tooltip>
           </div>
         )}
       </div>
@@ -122,6 +124,7 @@ MeetingItem.propTypes = {
     endTime: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.instanceOf(Date)]),
   }),
   onReply: PropTypes.func,
+  onJoinMeeting: PropTypes.func,
 }
 
 export default MeetingItem

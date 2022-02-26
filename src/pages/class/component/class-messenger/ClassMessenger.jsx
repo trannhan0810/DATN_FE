@@ -4,6 +4,7 @@ import { Send } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useParams } from 'react-router'
+import { Empty } from 'antd'
 import PostItem from '../PostItem'
 import ClassMessengerWrapper from './style'
 import useClassPosts from 'shared/hooks/useClassPosts'
@@ -33,9 +34,10 @@ const ClassMessenger = ({ className }) => {
           inverse
           style={{ display: 'flex', flexDirection: 'column-reverse' }}
           endMessage={
-            <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
-            </p>
+            <div style={{ alignSelf: 'center' }}>
+              {Empty.PRESENTED_IMAGE_DEFAULT}
+              <h4> No more post here !</h4>
+            </div>
           }
         >
           {posts?.length > 0 && posts.map(post => <PostItem className="post-item" key={post.id} post={post} />)}

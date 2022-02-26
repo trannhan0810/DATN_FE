@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Send } from '@mui/icons-material'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
+import { useParams } from 'react-router'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { Empty } from 'antd'
 import MeetingItem from './MeetingItem'
+import useClassMeetings from 'shared/hooks/useClassMeeting'
+import useMeeting from 'shared/hooks/useMeeting'
 
 const ClassMeetingWrapper = styled.div`
   height: 100%;
@@ -64,43 +69,39 @@ const ClassMeetingWrapper = styled.div`
 `
 
 const ClassMeetingList = ({ className }) => {
-  const [meetings, setMeetings] = useState([])
-
-  useEffect(() => {
-    const getPosts = () => {
-      setMeetings([
-        {
-          id: 1,
-          title: 'New channel meeting started',
-          avatar: null,
-          userName: null,
-          startTime: new Date(),
-          endTime: new Date(),
-        },
-        {
-          id: 2,
-          title: 'New channel meeting started',
-          avatar: null,
-          userName: null,
-          startTime: new Date(),
-          endTime: null,
-        },
-      ])
-    }
-    getPosts()
-  }, [])
+  const { classId } = useParams()
+  const { meetings, hasMore, fetchMoreMeetings } = useClassMeetings(classId)
+  const { handleExistingMeetJoin } = useMeeting()
 
   return (
     <ClassMeetingWrapper className={className}>
-      <div className="classMessenger-content">
-        {meetings.length > 0 &&
-          meetings.map(meeting => <MeetingItem className="post-item" key={meeting.id} meeting={meeting} />)}
-      </div>
-      <div className="classMessenger-footer">
-        <div className="send-msg-form">
-          <input />
-          <Send />
-        </div>
+      <div className="classMessenger-content" id="meetingList">
+        {/* {meetings.length > 0 &&
+          meetings.map(meeting => <MeetingItem className="post-item" key={meeting.id} meeting={meeting} />)} */}
+        <InfiniteScroll
+          dataLength={meetings?.length || 0}
+          next={fetchMoreMeetings}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          scrollableTarget="meetingList"
+          style={{ display: 'flex', flexDirection: 'column' }}
+          endMessage={
+            <div style={{ alignSelf: 'center' }}>
+              {Empty.PRESENTED_IMAGE_DEFAULT}
+              <h4> No more meeting here !</h4>
+            </div>
+          }
+        >
+          {meetings.length > 0 &&
+            meetings.map(meeting => (
+              <MeetingItem
+                className="post-item"
+                key={meeting.id}
+                meeting={meeting}
+                onJoinMeeting={() => handleExistingMeetJoin(false, meeting.roomId)}
+              />
+            ))}
+        </InfiniteScroll>
       </div>
     </ClassMeetingWrapper>
   )

@@ -23,11 +23,11 @@ function ClassDetailCard(props) {
   const Header = (
     <ClassInfoHeader>
       <div className="rightFold-class-name">Classes</div>
-      <div className="rightFold-heading-right">
-        <Tooltip className="add-button" onClick={startNewMeeting}>
+      <Tooltip onClick={startNewMeeting}>
+        <button type="button" className="add-button" style={{ cursor: 'pointer' }}>
           <VideoCameraOutlined /> Meet
-        </Tooltip>
-      </div>
+        </button>
+      </Tooltip>
     </ClassInfoHeader>
   )
 

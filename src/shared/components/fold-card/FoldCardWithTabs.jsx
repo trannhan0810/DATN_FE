@@ -1,7 +1,8 @@
-import { Tabs } from 'antd'
+import { Layout, Tabs } from 'antd'
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
+import { LayoutFilled } from '@ant-design/icons'
 
 const ClassInfoLayoutWrapper = styled.div`
   height: 100%;
@@ -44,32 +45,28 @@ function FoldCardWithTabs(props) {
 
   return (
     <ClassInfoLayoutWrapper>
-      <div className="fold-card-with-tabs-header">{FoldCardHeader}</div>
-      <div className="fold-card-with-tabs-content">
-        <Tabs
-          defaultActiveKey={1}
-          tabPosition="top"
-          tabBarStyle={{
-            height: '40px',
-            // width: '100%',
-            // minWidth: 0,
-            marginBottom: 0,
-            borderBottom: '2px solid lightgray',
-          }}
-          style={{ height: '100%', width: '100%' }}
-        >
-          {tabs.map((_ele, i) => (
-            <Tabs.TabPane
-              className="class-content"
-              tab={tabs[i].displayText}
-              key={Number(i)}
-              style={{ flex: '1 1 0px' }}
-            >
-              {tabs[i].component}
-            </Tabs.TabPane>
-          ))}
-        </Tabs>
-      </div>
+      <Layout style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'transparent' }}>
+        <Layout.Header style={{ flex: '0 0 50px', backgroundColor: 'transparent' }}>{FoldCardHeader}</Layout.Header>
+        <Layout.Content className="fold-card-with-tabs-content">
+          <Tabs
+            defaultActiveKey={1}
+            tabPosition="top"
+            tabBarStyle={{ height: 40, marginBottom: 0, borderBottom: '2px solid lightgray' }}
+            style={{ height: '100%', width: '100%' }}
+          >
+            {tabs.map((_ele, i) => (
+              <Tabs.TabPane
+                className="class-content"
+                tab={tabs[i].displayText}
+                key={Number(i)}
+                style={{ flex: '1 1 auto' }}
+              >
+                {tabs[i].component}
+              </Tabs.TabPane>
+            ))}
+          </Tabs>
+        </Layout.Content>
+      </Layout>
     </ClassInfoLayoutWrapper>
   )
 }

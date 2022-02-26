@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 const ClassInfoLayoutWrapper = styled.div`
   height: 100%;
   width: 100%;
-  padding: 0px 24px 0px 24px;
   background-color: #f5f5f5;
   display: flex;
   flex-direction: column;

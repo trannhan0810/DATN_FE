@@ -9,6 +9,7 @@ import ClassMeetingList from '../component/ClassMeetingList'
 import ClassInfoLayoutWrapper, { ClassInfoHeader } from './style'
 import useMeeting from 'shared/hooks/useMeeting'
 import FoldCardWithTabs from 'shared/components/fold-card/FoldCardWithTabs'
+import EllipsisFlexText from 'shared/components/EllipsisFlexText'
 
 function ClassDetailCard(props) {
   const { handleExistingMeetJoin, startNewMeeting } = useMeeting()
@@ -17,12 +18,14 @@ function ClassDetailCard(props) {
     { displayText: 'Chat', component: <ClassMessenger /> },
     { displayText: 'Meetings', component: <ClassMeetingList /> },
     { displayText: 'Members', component: <ClassMemberList /> },
-    { displayText: 'Setting', component: <div /> },
+    { displayText: 'Setting', component: <div style={{ width: '100%' }} /> },
   ]
 
   const Header = (
     <ClassInfoHeader>
-      <div className="rightFold-class-name">Classes</div>
+      <div className="rightFold-class-name">
+        <EllipsisFlexText>Classes</EllipsisFlexText>
+      </div>
       <Tooltip onClick={startNewMeeting}>
         <button type="button" className="add-button" style={{ cursor: 'pointer' }}>
           <VideoCameraOutlined /> Meet

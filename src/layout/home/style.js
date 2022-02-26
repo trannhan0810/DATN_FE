@@ -72,6 +72,10 @@ const HomeLayoutStyle = styled.div`
         .content-left-fold {
           display: none;
         }
+
+        .content-right-fold {
+          width: 100%;
+        }
       }
     }
   }

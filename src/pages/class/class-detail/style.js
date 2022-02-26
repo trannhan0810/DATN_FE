@@ -17,7 +17,7 @@ const ClassInfoLayoutWrapper = styled.div`
     .rightFold-class-name {
       display: flex;
       align-items: center;
-      flex: 0 0 50px;
+      flex: 1 1 0px;
       font-size: 30px;
       font-weight: 600;
     }
@@ -56,7 +56,7 @@ const ClassInfoHeader = styled.div`
   .rightFold-class-name {
     display: flex;
     align-items: center;
-    flex: 0 0 50px;
+    flex: 1 1 0px;
     font-size: 30px;
     font-weight: 600;
   }

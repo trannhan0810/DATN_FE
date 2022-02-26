@@ -52,7 +52,7 @@ const UserItemWrapper = styled.div`
 `
 
 const UserItem = props => {
-  const { className, user, onView, onEdit, onDelete } = props
+  const { className, user, onAdd } = props
 
   return (
     <UserItemWrapper className={className}>
@@ -63,25 +63,10 @@ const UserItem = props => {
         <b className="user-name">{user.fullName}</b>
         <small className="user-email">{user.email}</small>
       </div>
-      <div className="user-role">
-        <b>{user.roleName}</b>
-      </div>
       <div className="actions-buttons">
-        {onView && (
-          <Tooltip className="action-btn" onClick={onView}>
-            <VisibilitySharp />
-          </Tooltip>
-        )}
-        {onEdit && (
-          <Tooltip className="action-btn" onClick={onEdit}>
-            <Edit />
-          </Tooltip>
-        )}
-        {onDelete && (
-          <Tooltip className="action-btn" onCLick={onDelete}>
-            <DeleteOutline />
-          </Tooltip>
-        )}
+        <Tooltip className="add-btn" onCLick={onAdd}>
+          Add
+        </Tooltip>
       </div>
     </UserItemWrapper>
   )
@@ -95,9 +80,7 @@ UserItem.propTypes = {
     avatar: PropTypes.string,
     roleName: PropTypes.string,
   }),
-  onEdit: PropTypes.func,
-  onView: PropTypes.func,
-  onDelete: PropTypes.func,
+  onAdd: PropTypes.func,
 }
 
 export default UserItem

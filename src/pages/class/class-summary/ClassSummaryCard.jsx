@@ -29,9 +29,9 @@ function ClassSummaryCard(props) {
   const Header = (
     <div className="class-summary-header">
       {redirect.length > 1 && <Redirect to={redirect} />}
-      <Tooltip title="All classes" onClick={backToAllClasses}>
+      <Tooltip onClick={backToAllClasses} style={{ fontSize: 120 }}>
         <LeftOutlined />
-        <label className="menu-label pointer-mouse">Class</label>
+        <label className="menu-label pointer-mouse">Classes</label>
       </Tooltip>
     </div>
   )

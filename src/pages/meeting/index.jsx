@@ -373,6 +373,10 @@ const MeetingPage = () => {
       setIsLoading(true)
       socketRef.current = io.connect(process.env.REACT_APP_SERVER_URL)
       console.log('>>>>connect', socketRef.current)
+      if (!location.state) {
+        setPopUp('connection timed out')
+      }
+
       if (!location.state.admin) {
         console.log('isNotAdmin')
         setPopUp('Waiting')

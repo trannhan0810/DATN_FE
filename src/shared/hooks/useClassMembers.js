@@ -1,18 +1,18 @@
 import { useCallback, useEffect, useState } from 'react'
 import { isEqual } from 'lodash-es'
+import { useParams } from 'react-router'
 import { convertQueryToParams } from '../utils/query-until'
 import usePagination from './usePagination'
-import { showError, showSuccess } from 'core/tools'
-import { getClassMembers, addClassMember, removeClassMember } from 'api/class'
+import { getClassMembers } from 'api/class'
+import { showError } from 'core/tools'
 
-const useClassMembers = () => {
+const useClassMember = () => {
   const { pageSize, currentPage, sorter, onChangePagination, setCurrentPage } = usePagination()
   const [isLoading, setIsLoading] = useState(false)
-  const [isUpsert, setIsUpsert] = useState(false)
   const [members, setMembers] = useState([])
-  const [totalItems, setTotalItem] = useState(0)
+  const [hasMore, setHasMore] = useState(false)
   const [filters, setFilters] = useState({})
-  const [classId, setClassId] = useState(null)
+  const { classId } = useParams()
 
   const onFilters = values => {
     if (!isEqual(values, filters)) {
@@ -21,72 +21,62 @@ const useClassMembers = () => {
     }
   }
 
-  const getClassMemberList = useCallback(async () => {
-    if (classId) {
-      try {
-        setIsLoading(true)
-        const params = convertQueryToParams({ pageSize, currentPage, sorter, filters })
-        const res = await getClassMembers(params)
-        setMembers(res?.data)
-        setTotalItem(res?.totalItems)
-        setIsLoading(false)
-      } catch (error) {
-        showError(error)
-        setMembers([])
-        setIsLoading(false)
-      }
+  const fetchInitialClassMembers = useCallback(async () => {
+    try {
+      if (!classId) return
+      setIsLoading(true)
+      const params = convertQueryToParams({ pageSize, currentPage, sorter, filters })
+      const res = await getClassMembers(classId, params)
+      setCurrentPage(1)
+      setMembers(res?.results || [])
+      setHasMore(res?.total > pageSize)
+    } catch (error) {
+      showError(error)
+      setCurrentPage(1)
+      setMembers([])
+      setHasMore(false)
+    } finally {
+      setIsLoading(false)
     }
-  }, [currentPage, pageSize, filters, sorter])
+  }, [pageSize, filters, sorter, classId])
+
+  const fetchMoreClassMembers = async () => {
+    if (isLoading) return
+    const currentClassMembers = members
+    const oldCurrentPage = currentPage
+    try {
+      const newCurrentPage = currentPage + 1
+      setIsLoading(true)
+      const params = convertQueryToParams({ pageSize, currentPage: newCurrentPage, sorter, filters })
+      const res = await getClassMembers(classId, params)
+      setMembers([...members, ...res?.results])
+      setCurrentPage(newCurrentPage)
+      setHasMore(res?.total > newCurrentPage * pageSize)
+    } catch (error) {
+      showError(error)
+      setCurrentPage(oldCurrentPage)
+      setMembers(currentClassMembers)
+      setHasMore(false)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    getClassMemberList()
-  }, [getClassMemberList])
-
-  const addMember = async values => {
-    try {
-      setIsUpsert(true)
-      const response = await addClassMember(values)
-      if (response) {
-        getClassMemberList()
-        showSuccess(`Add member successfully`)
-        return response?.data // TODO: Close Modal
-      }
-    } catch (error) {
-      showError(error)
-    } finally {
-      setIsUpsert(false)
-    }
-  }
-
-  const removeMember = async values => {
-    try {
-      setIsUpsert(true)
-      const response = await removeClassMember(values)
-      if (response) {
-        getClassMemberList()
-        showSuccess(`Can not remove this member`)
-        return response?.data // TODO: Close Modal
-      }
-    } catch (error) {
-      showError(error)
-    } finally {
-      setIsUpsert(false)
-    }
-  }
+    fetchInitialClassMembers()
+  }, [fetchInitialClassMembers])
 
   return {
     isLoading,
-    isUpsert,
-    totalItems,
     members,
+    hasMore,
     pageSize,
     currentPage,
     onChangePagination,
     setCurrentPage,
     onFilters,
-    addMember,
-    removeMember,
+    fetchMoreClassMembers,
   }
 }
 
-export default useClassMembers
+export default useClassMember

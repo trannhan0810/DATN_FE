@@ -7,7 +7,7 @@ import { getClass } from 'api/class'
 import { showError } from 'core/tools'
 
 const Class = () => {
-  const { id } = useParams()
+  const { classId } = useParams()
   const [loading, setLoading] = useState(false)
   const [classInfo, setClassInfo] = useState({})
 
@@ -15,7 +15,7 @@ const Class = () => {
     setLoading(true)
     const getClassData = async () => {
       try {
-        const data = await getClass(id)
+        const data = await getClass(classId)
         setClassInfo(data)
       } catch {
         showError('Load data fail')
@@ -29,7 +29,7 @@ const Class = () => {
   return (
     <HomeLayout
       LeftFold={<ClassSummaryCard loading={loading} classInfo={classInfo} />}
-      RightFold={<ClassDetailCard />}
+      RightFold={<ClassDetailCard loading={loading} classInfo={classInfo} />}
     />
   )
 }

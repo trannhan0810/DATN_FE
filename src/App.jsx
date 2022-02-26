@@ -18,7 +18,7 @@ function App() {
       <Switch>
         {/* <GuardRoute isPrivate path="/" component={() => <Redirect to="/classes" />} exact /> */}
         <GuardRoute isPrivate path="/chat" component={loadable(import('./pages/home/Home'))} exact />
-        <GuardRoute isPrivate path="/classes/:id" component={loadable(import('./pages/class'))} exact />
+        <GuardRoute isPrivate path="/classes/:classId" component={loadable(import('./pages/class'))} exact />
         <GuardRoute isPrivate path="/classes" component={loadable(import('./pages/classes'))} exact />
         <GuardRoute isPrivate path="/calls" component={loadable(import('./pages/home/Home'))} exact />
         <GuardRoute isPrivate path="/meeting" component={loadable(import('./pages/meeting'))} exact />

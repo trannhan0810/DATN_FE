@@ -49,7 +49,13 @@ function FoldCardWithTabs(props) {
         <Tabs
           defaultActiveKey={1}
           tabPosition="top"
-          tabBarStyle={{ height: '40px', width: '100%', margin: 0, borderBottom: '2px solid lightgray' }}
+          tabBarStyle={{
+            height: '40px',
+            // width: '100%',
+            // minWidth: 0,
+            marginBottom: 0,
+            borderBottom: '2px solid lightgray',
+          }}
           style={{ height: '100%', width: '100%' }}
         >
           {tabs.map((_ele, i) => (

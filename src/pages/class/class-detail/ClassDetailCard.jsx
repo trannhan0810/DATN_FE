@@ -17,7 +17,6 @@ function ClassDetailCard(props) {
     { displayText: 'Chat', component: <ClassMessenger /> },
     { displayText: 'Meetings', component: <ClassMeetingList /> },
     { displayText: 'Members', component: <ClassMemberList /> },
-    { displayText: 'Pending Request', component: <div /> },
     { displayText: 'Setting', component: <div /> },
   ]
 

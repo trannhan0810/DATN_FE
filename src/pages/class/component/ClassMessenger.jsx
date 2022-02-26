@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Avatar } from 'antd'
 import { Send } from '@mui/icons-material'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-import { formatDateTimeDetail } from '../../../shared/utils/date'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import PostItem from './PostItem'
 
 const ClassMessengerWrapper = styled.div`
@@ -67,6 +66,38 @@ const ClassMessengerWrapper = styled.div`
 
 const ClassMessenger = ({ className }) => {
   const [posts, setPosts] = useState([])
+  const [hasMore, setHasMore] = useState(true)
+
+  const fetchMoreData = () => {
+    if (posts.length >= 10) {
+      setHasMore(false)
+      return
+    }
+
+    setTimeout(() => {
+      setPosts([
+        ...posts,
+        {
+          id: 1 + posts.length,
+          avatar: null,
+          userName: null,
+          title: `New channel meeting started${posts.length}`,
+          content: null,
+          time: new Date(),
+        },
+        {
+          id: 2 + posts.length,
+          avatar: null,
+          userName: `Tran Nhan${posts.length}`,
+          title: null,
+          content:
+            'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+          time: new Date(),
+          replies: [{ id: 4, userName: 'John', msg: 'iansoksa ioana akn', time: new Date() }],
+        },
+      ])
+    }, 500)
+  }
 
   useEffect(() => {
     const getPosts = () => {
@@ -82,6 +113,26 @@ const ClassMessenger = ({ className }) => {
           time: new Date(),
           replies: [{ id: 4, userName: 'John', msg: 'iansoksa ioana akn', time: new Date() }],
         },
+        {
+          id: 3,
+          avatar: null,
+          userName: 'Tran Nhan',
+          title: null,
+          content:
+            'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+          time: new Date(),
+          replies: [{ id: 4, userName: 'John', msg: 'iansoksa ioana akn', time: new Date() }],
+        },
+        {
+          id: 4,
+          avatar: null,
+          userName: 'Tran Nhan',
+          title: null,
+          content:
+            'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+          time: new Date(),
+          replies: [{ id: 4, userName: 'John', msg: 'iansoksa ioana akn', time: new Date() }],
+        },
       ])
     }
     getPosts()
@@ -89,8 +140,24 @@ const ClassMessenger = ({ className }) => {
 
   return (
     <ClassMessengerWrapper className={className}>
-      <div className="classMessenger-content">
-        {posts.length > 0 && posts.map(post => <PostItem className="post-item" key={post.id} post={post} />)}
+      <div className="classMessenger-content" id="messageList" style={{ height: '100%', overflow: 'auto' }}>
+        {/* {posts.length > 0 && posts.map(post => <PostItem className="post-item" key={post.id} post={post} />)} */}
+        <InfiniteScroll
+          dataLength={posts.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          scrollableTarget="messageList"
+          inverse
+          style={{ display: 'flex', flexDirection: 'column-reverse' }}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {posts.length > 0 && posts.map(post => <PostItem className="post-item" key={post.id} post={post} />)}
+        </InfiniteScroll>
       </div>
       <div className="classMessenger-footer">
         <div className="send-msg-form">

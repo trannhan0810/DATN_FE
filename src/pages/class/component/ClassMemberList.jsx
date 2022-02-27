@@ -1,13 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { Avatar, Button, Dropdown, Empty, Menu, Spin, Tooltip } from 'antd'
+import { Empty, Spin, Tooltip } from 'antd'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { UserAddOutlined } from '@ant-design/icons'
 import { useParams } from 'react-router'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { PersonAddAlt1Outlined, Search } from '@mui/icons-material'
+import { Search } from '@mui/icons-material'
 import UserItem from './UserItem'
-import useUsers from 'shared/hooks/useUsers'
 import useClassMember from 'shared/hooks/useClassMembers'
 
 const ClassMemberListWrapper = styled.div`

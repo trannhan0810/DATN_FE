@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { CallToAction, Close, MoreHorizOutlined, Search } from '@mui/icons-material'
-import { Avatar, Empty, Tooltip } from 'antd'
+import { Avatar, Drawer, Empty, Tooltip } from 'antd'
 import InitialsAvatar from 'react-initials-avatar'
 import PropTypes from 'prop-types'
 import useClassesMe from '../../../shared/hooks/useClassesMe'
+import CreateClass from '../components/CreateClass'
+import JoinClass from '../components/JoinClass'
 import ClassListCardWrapper, { ClassListItem } from './style'
 import FoldCard from 'shared/components/fold-card/FoldCard'
 import EllipsisFlexText from 'shared/components/EllipsisFlexText'
@@ -17,6 +19,7 @@ const ClassListCard = props => {
   const [isSearch, setIsSearch] = useState(false)
   const searchInputRef = useRef(null)
   const { history } = useRouter()
+  const [showDrawer, setShowDrawer] = useState('')
 
   const Header = (
     <SearchBarHeader
@@ -29,7 +32,7 @@ const ClassListCard = props => {
   )
 
   const Content = (
-    <div className="class-list-content">
+    <div className="class-list-content site-drawer-render-in-current-wrapper">
       <div className="class-list-container">
         {!isLoading && filterClasses.length === 0 && (
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -55,7 +58,26 @@ const ClassListCard = props => {
           </ClassListItem>
         ))}
       </div>
-      <div className="class-list-action">Create New Team</div>
+      <Tooltip className="class-list-action" onClick={() => setShowDrawer('createClass')}>
+        Create class
+      </Tooltip>
+      <Tooltip className="class-list-action" onClick={() => setShowDrawer('joinClass')}>
+        Join class with code
+      </Tooltip>
+      <Drawer
+        title="Basic Drawer"
+        placement="bottom"
+        closable
+        onClose={() => {
+          setShowDrawer('')
+        }}
+        visible={showDrawer === 'createClass' || showDrawer === 'joinClass'}
+        getContainer={false}
+        style={{ position: 'absolute' }}
+      >
+        {showDrawer === 'createClass' && <CreateClass onOK={() => setShowDrawer('')} />}
+        {showDrawer === 'joinClass' && <JoinClass />}
+      </Drawer>
     </div>
   )
 

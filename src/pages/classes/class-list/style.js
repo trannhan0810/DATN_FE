@@ -24,13 +24,25 @@ const ClassListCardWrapper = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 32px;
+      font-size: 28px;
       cursor: pointer;
+      color: --primary-color;
+      margin-top: 4px;
     }
 
     .class-list-action:hover {
       background-color: white;
     }
+  }
+
+  .site-drawer-render-in-current-wrapper {
+    position: relative;
+    padding: 12px;
+    overflow-y: hidden;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #ebedf0;
+    border-radius: 2px;
   }
 `
 

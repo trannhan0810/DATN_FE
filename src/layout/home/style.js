@@ -9,6 +9,18 @@ const HomeLayoutStyle = styled.div`
   display: flex;
   flex-direction: column;
 
+  .add-button {
+    background-color: #6264a7;
+    width: fit-content;
+    color: white;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-left: 8px;
+  }
+
   .home-header {
     width: 100%;
     flex: 0 0 64px;

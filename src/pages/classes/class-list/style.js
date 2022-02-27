@@ -13,9 +13,23 @@ const ClassListCardWrapper = styled.div`
 
     .class-list-container {
       width: 100%;
-      flex: 1;
+      flex: 1 1 0px;
       display: flex;
       flex-direction: column;
+    }
+
+    .class-list-action {
+      width: 100%;
+      flex: 0 0 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      cursor: pointer;
+    }
+
+    .class-list-action:hover {
+      background-color: white;
     }
   }
 `

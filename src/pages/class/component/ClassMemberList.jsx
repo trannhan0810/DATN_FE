@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Avatar, Button, Dropdown, Empty, Menu, Tooltip } from 'antd'
+import { Avatar, Button, Dropdown, Empty, Menu, Spin, Tooltip } from 'antd'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { UserAddOutlined } from '@ant-design/icons'
@@ -72,7 +72,7 @@ const ClassMemberListWrapper = styled.div`
 
 const ClassMemberList = ({ className }) => {
   const { classId } = useParams()
-  const { members, hasMore, fetchMoreClassMembers } = useClassMember(classId)
+  const { members, hasMore, fetchMoreClassMembers, isLoading } = useClassMember(classId)
   const [isAddUser, setIsAddUser] = useState(false)
   const searchRef = useRef()
 
@@ -99,22 +99,26 @@ const ClassMemberList = ({ className }) => {
             scrollableTarget="memberList"
             style={{ display: 'flex', flexDirection: 'column' }}
             endMessage={
-              <div style={{ alignSelf: 'center' }}>
-                {Empty.PRESENTED_IMAGE_DEFAULT}
-                <h4> No more meeting here !</h4>
-              </div>
+              !isLoading && (
+                <div style={{ alignSelf: 'center' }}>
+                  {Empty.PRESENTED_IMAGE_DEFAULT}
+                  <h4> No more meeting here !</h4>
+                </div>
+              )
             }
           >
-            {members.map(user => (
-              <UserItem
-                className="classMemberList-user-item"
-                key={user.id}
-                user={user}
-                onView={() => {}}
-                onEdit={() => {}}
-                onDelete={() => {}}
-              />
-            ))}
+            {isLoading && <Spin size="large" />}
+            {!isLoading &&
+              members.map(user => (
+                <UserItem
+                  className="classMemberList-user-item"
+                  key={user.id}
+                  user={user}
+                  onView={() => {}}
+                  onEdit={() => {}}
+                  onDelete={() => {}}
+                />
+              ))}
           </InfiniteScroll>
         )}
       </div>

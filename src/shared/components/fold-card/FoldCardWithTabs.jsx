@@ -46,12 +46,22 @@ function FoldCardWithTabs(props) {
   return (
     <ClassInfoLayoutWrapper>
       <Layout style={{ display: 'flex', flexDirection: 'column', backgroundColor: 'transparent' }}>
-        <Layout.Header style={{ flex: '0 0 50px', backgroundColor: 'transparent' }}>{FoldCardHeader}</Layout.Header>
+        <Layout.Header
+          style={{
+            flex: '0 0 70px',
+            backgroundColor: 'transparent',
+            borderBottom: '2px solid lightgray',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          {FoldCardHeader}
+        </Layout.Header>
         <Layout.Content className="fold-card-with-tabs-content">
           <Tabs
             defaultActiveKey={1}
             tabPosition="top"
-            tabBarStyle={{ height: 40, marginBottom: 0, borderBottom: '2px solid lightgray' }}
+            tabBarStyle={{ height: 40, marginBottom: 0, fontSize: 40, fontWeight: 600 }}
             style={{ height: '100%', width: '100%' }}
           >
             {tabs.map((_ele, i) => (

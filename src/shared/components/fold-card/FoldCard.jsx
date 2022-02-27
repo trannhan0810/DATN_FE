@@ -12,7 +12,7 @@ const FoldCardWrapper = styled.div`
   overflow-y: hidden;
 
   .fold-card-header {
-    flex: 0 0 90px;
+    flex: 0 0 70px;
     width: 100%;
     display: flex;
     padding: 16px;

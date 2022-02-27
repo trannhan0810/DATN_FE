@@ -5,6 +5,7 @@ import ClassDetailCard from './class-detail/ClassDetailCard'
 import HomeLayout from 'layout/home/HomeLayout'
 import { getClass } from 'api/class'
 import { showError } from 'core/tools'
+import ClassListCard from 'pages/classes/class-list/ClassListCard'
 
 const Class = () => {
   const { classId } = useParams()
@@ -24,13 +25,10 @@ const Class = () => {
       }
     }
     getClassData()
-  }, [])
+  }, [classId])
 
   return (
-    <HomeLayout
-      LeftFold={<ClassSummaryCard loading={loading} classInfo={classInfo} />}
-      RightFold={<ClassDetailCard loading={loading} classInfo={classInfo} />}
-    />
+    <HomeLayout LeftFold={<ClassListCard />} RightFold={<ClassDetailCard loading={loading} classInfo={classInfo} />} />
   )
 }
 

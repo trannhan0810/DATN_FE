@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import RightFold from './right-fold'
 import ClassListCard from './class-list/ClassListCard'
-import AllClassCard from './search-class-card/AllClassCard'
 import HomeLayout from 'layout/home/HomeLayout'
 import useWindowDimensions from 'shared/hooks/useWindowDimensions'
 
@@ -15,7 +13,7 @@ const Classes = () => {
   }
 
   // return <HomeLayout LeftFold={<ClassListCard />} RightFold={<RightFold loading={loading} classes={classes} />} />
-  return <HomeLayout isHaveLeftFold={false} RightFold={<AllClassCard />} />
+  return <HomeLayout isHaveLeftFold={false} RightFold={<ClassListCard />} />
 }
 
 export default Classes

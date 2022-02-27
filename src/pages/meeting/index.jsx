@@ -538,7 +538,6 @@ const MeetingPage = () => {
               <VideoButton isVideoMuted={isVideoMuted} onClick={videoButtonHandler} />
               <AudioButton isAudioMuted={isAudioMuted} onClick={audioButtonHandler} />
               <ShareScreenButton isScreenShared={isScreenShared} onClick={shareScreenButtonHandler} />
-              <CopyIdButton />
               <MessengerButton
                 isShowMessenger={isShowMessenger}
                 isHaveNewMessage={isHaveNewMessage}

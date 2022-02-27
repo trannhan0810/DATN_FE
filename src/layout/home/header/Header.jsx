@@ -23,10 +23,10 @@ function Header(props) {
           <span className="header-label">{appName}</span>
         </div>
         <div className="header-controls">
-          <div className="header-search">
+          {/* <div className="header-search">
             <i className="fi-rr-search" />
             <input placeholder="Search" />
-          </div>
+          </div> */}
           <div className="header-profile">
             {/* <span className="header-user-name"> Name </span> */}
             <Avatar className="header-avatar" alt="" src={defaultAvatar} />

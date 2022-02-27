@@ -49,12 +49,13 @@ const ClassListCard = props => {
             <div className="class-list-item-name">
               <EllipsisFlexText>{classItem.name}</EllipsisFlexText>
             </div>
-            <div className="class-list-item-menu">
+            {/* <div className="class-list-item-menu">
               <MoreHorizOutlined />
-            </div>
+            </div> */}
           </ClassListItem>
         ))}
       </div>
+      <div className="class-list-action">Create New Team</div>
     </div>
   )
 

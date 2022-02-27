@@ -4,14 +4,14 @@ import { Send } from '@mui/icons-material'
 import PropTypes from 'prop-types'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useParams } from 'react-router'
-import { Empty } from 'antd'
+import { Empty, Spin } from 'antd'
 import PostItem from '../PostItem'
 import ClassMessengerWrapper from './style'
 import useClassPosts from 'shared/hooks/useClassPosts'
 
 const ClassMessenger = ({ className }) => {
   const { classId } = useParams()
-  const { posts, hasMore, fetchMorePosts, sendPost } = useClassPosts(classId)
+  const { posts, hasMore, fetchMorePosts, sendPost, isLoading } = useClassPosts(classId)
   const draftMsgRef = useRef()
 
   const sendPostHandler = () => {
@@ -34,13 +34,18 @@ const ClassMessenger = ({ className }) => {
           inverse
           style={{ display: 'flex', flexDirection: 'column-reverse' }}
           endMessage={
-            <div style={{ alignSelf: 'center' }}>
-              {Empty.PRESENTED_IMAGE_DEFAULT}
-              <h4> No more post here !</h4>
-            </div>
+            !isLoading && (
+              <div style={{ alignSelf: 'center' }}>
+                {Empty.PRESENTED_IMAGE_DEFAULT}
+                <h4> No more post here !</h4>
+              </div>
+            )
           }
         >
-          {posts?.length > 0 && posts.map(post => <PostItem className="post-item" key={post.id} post={post} />)}
+          {isLoading && <Spin size="large" />}
+          {!isLoading &&
+            posts?.length > 0 &&
+            posts.map(post => <PostItem className="post-item" key={post.id} post={post} />)}
         </InfiniteScroll>
       </div>
       <div className="classMessenger-footer">

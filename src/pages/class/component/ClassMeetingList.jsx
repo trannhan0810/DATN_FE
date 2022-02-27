@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { Empty } from 'antd'
+import { Empty, Spin } from 'antd'
 import MeetingItem from './MeetingItem'
 import useClassMeetings from 'shared/hooks/useClassMeeting'
 import useMeeting from 'shared/hooks/useMeeting'
@@ -70,7 +70,7 @@ const ClassMeetingWrapper = styled.div`
 
 const ClassMeetingList = ({ className }) => {
   const { classId } = useParams()
-  const { meetings, hasMore, fetchMoreMeetings } = useClassMeetings(classId)
+  const { meetings, hasMore, fetchMoreMeetings, isLoading } = useClassMeetings(classId)
   const { handleExistingMeetJoin } = useMeeting()
 
   return (
@@ -86,13 +86,17 @@ const ClassMeetingList = ({ className }) => {
           scrollableTarget="meetingList"
           style={{ display: 'flex', flexDirection: 'column' }}
           endMessage={
-            <div style={{ alignSelf: 'center' }}>
-              {Empty.PRESENTED_IMAGE_DEFAULT}
-              <h4> No more meeting here !</h4>
-            </div>
+            !isLoading && (
+              <div style={{ alignSelf: 'center' }}>
+                {Empty.PRESENTED_IMAGE_DEFAULT}
+                <h4> No more meeting here !</h4>
+              </div>
+            )
           }
         >
-          {meetings.length > 0 &&
+          {isLoading && <Spin size="large" />}
+          {!isLoading &&
+            meetings.length > 0 &&
             meetings.map(meeting => (
               <MeetingItem
                 className="post-item"

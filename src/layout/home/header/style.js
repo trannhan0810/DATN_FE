@@ -45,7 +45,7 @@ const HeaderWrapper = styled.div`
       flex: 11;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
 
       .header-search {
         height: 100%;

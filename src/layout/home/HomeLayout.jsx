@@ -19,7 +19,7 @@ const HomeLayout = props => {
           {topOptions.map(option => (
             <SidebarOption key={option.id} option={option} className="side-bar-icon" />
           ))}
-          <SidebarOption option={more} className="side-bar-icon" />
+          {/* <SidebarOption option={more} className="side-bar-icon" /> */}
         </div>
         <div className="content">
           {isHaveLeftFold && isShowLeftFold && <div className="content-left-fold">{LeftFold}</div>}

@@ -1,6 +1,6 @@
 import React from 'react'
-import { LogoutOutlined, MoreOutlined } from '@ant-design/icons'
-import { Avatar, Menu, Tooltip, Dropdown } from 'antd'
+import { MoreOutlined } from '@ant-design/icons'
+import { Avatar, Dropdown } from 'antd'
 import PropTypes from 'prop-types'
 import { MenuOutlined } from '@mui/icons-material'
 import defaultAvatar from '../../../assets/images/avatar.png'

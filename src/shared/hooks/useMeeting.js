@@ -50,7 +50,7 @@ const useMeeting = () => {
       } else {
         setLoading(false)
         history.push({
-          pathname: `/videochat/room/${roomId}`,
+          pathname: `/meeting/room/${roomId}`,
           state: { authorised: true, admin: false },
         })
       }

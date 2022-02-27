@@ -10,7 +10,7 @@ import useWindowDimensions from 'shared/hooks/useWindowDimensions'
 
 function Header(props) {
   const { width } = useWindowDimensions()
-  const appName = width > 800 ? 'Online Learning' : ''
+  const appName = width > 800 ? 'OLearn' : ''
   const { onClickIcon, className } = props
 
   return (

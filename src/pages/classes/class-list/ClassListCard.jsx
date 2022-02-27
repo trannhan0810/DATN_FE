@@ -3,6 +3,7 @@ import { CallToAction, Close, MoreHorizOutlined, Search } from '@mui/icons-mater
 import { Avatar, Drawer, Empty, Tooltip } from 'antd'
 import InitialsAvatar from 'react-initials-avatar'
 import PropTypes from 'prop-types'
+import { useParams } from 'react-router'
 import useClassesMe from '../../../shared/hooks/useClassesMe'
 import CreateClass from '../components/CreateClass'
 import JoinClass from '../components/JoinClass'
@@ -11,6 +12,7 @@ import FoldCard from 'shared/components/fold-card/FoldCard'
 import EllipsisFlexText from 'shared/components/EllipsisFlexText'
 import useRouter from 'shared/hooks/useRouter'
 import SearchBarHeader from 'shared/components/SearchBarHeader'
+import useWindowDimensions from 'shared/hooks/useWindowDimensions'
 
 const ClassListCard = props => {
   const { myClasses, isLoading } = useClassesMe()
@@ -20,6 +22,8 @@ const ClassListCard = props => {
   const searchInputRef = useRef(null)
   const { history } = useRouter()
   const [showDrawer, setShowDrawer] = useState('')
+  const { width } = useWindowDimensions()
+  const { classId } = useParams()
 
   const Header = (
     <SearchBarHeader
@@ -65,7 +69,7 @@ const ClassListCard = props => {
         Join class with code
       </Tooltip>
       <Drawer
-        title="Basic Drawer"
+        title={(showDrawer === 'createClass' && 'Create New Class') || (showDrawer === 'joinClass' && 'Join Class')}
         placement="bottom"
         closable
         onClose={() => {
@@ -87,6 +91,12 @@ const ClassListCard = props => {
       setFilterClasses(myClasses)
     }
   }, [isLoading])
+
+  useEffect(() => {
+    if (!classId && !isLoading && myClasses.length > 0 && width > 720) {
+      history.push(`/classes/${myClasses[0].id}`)
+    }
+  }, [classId, isLoading, myClasses, width])
 
   return (
     <ClassListCardWrapper>

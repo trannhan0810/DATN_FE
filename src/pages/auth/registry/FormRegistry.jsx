@@ -11,13 +11,13 @@ const FormLogin = ({ onSubmit }) => {
 
   return (
     <>
-      <h2 className="t-400-25px-34px">Welcome to OLearning</h2>
+      <h2 className="t-400-25px-34px">Welcome to Patcredit</h2>
       <Form onFinish={onSubmit} layout="vertical">
         <div className="form-content">
-          <FormItem label="email" name="email" rules={[{ required: true, message: 'Please enter email' }]}>
+          <FormItem label="email" name="email" rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập' }]}>
             <Input type="text" size="large" />
           </FormItem>
-          <FormItem label="Password" name="password" rules={[{ required: true, message: 'Please enter password' }]}>
+          <FormItem label="Mật khẩu" name="password" rules={[{ required: true, message: 'Vui lòng nhập mật khẩu' }]}>
             <Input.Password
               autoComplete="off"
               type="password"
@@ -26,13 +26,16 @@ const FormLogin = ({ onSubmit }) => {
             />
           </FormItem>
           <FormItem>
+            <FormItem name="isRememberMe" valuePropName="checked" noStyle>
+              <Checkbox>Ghi nhớ đăng nhập</Checkbox>
+            </FormItem>
             {/* <Link to="/forgot-password" style={{ float: 'right' }}>
               Quên mật khẩu?
             </Link> */}
           </FormItem>
           <FormItem>
             <Button htmlType="submit" block size="large" type="primary" loading={isLoading} className="custom-btn">
-              Login
+              Đăng nhập
             </Button>
           </FormItem>
         </div>

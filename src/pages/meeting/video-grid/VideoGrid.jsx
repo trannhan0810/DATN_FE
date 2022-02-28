@@ -58,7 +58,7 @@ function useVideoGridLayout() {
   return [numOfCols, numOfRows, setNumOfItems, updateLayout]
 }
 
-const VideoGrid = ({ children, updateLayoutRef, containerClassName = '', itemClassName = '' }) => {
+const VideoGrid = ({ children, updateLayoutRef, containerClassName = '', itemClassName = '', isScreenShared }) => {
   const [numOfCols, numOfRows, setNumOfItems, updateLayout] = useVideoGridLayout()
 
   useEffect(() => {
@@ -94,8 +94,8 @@ const VideoGrid = ({ children, updateLayoutRef, containerClassName = '', itemCla
           className={`grid-item ${itemClassName}`}
           style={{
             flex: '0 0 1',
-            flexBasis: `${Math.floor(100 / numOfCols)}%`,
-            height: `${Math.floor(100 / numOfRows)}%`,
+            flexBasis: isScreenShared ? '100%' : `${Math.floor(100 / numOfCols)}%`,
+            height: isScreenShared ? '100%' : `${Math.floor(100 / numOfRows)}%`,
           }}
         >
           {child}
@@ -110,6 +110,7 @@ VideoGrid.propTypes = {
   containerClassName: PropTypes.string,
   itemClassName: PropTypes.string,
   updateLayoutRef: PropTypes.shape({ current: PropTypes.func }),
+  isScreenShared: PropTypes.bool,
 }
 
 export default VideoGrid

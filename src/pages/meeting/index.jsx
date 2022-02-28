@@ -32,8 +32,6 @@ import { showInfo } from 'core/tools'
 const initialMessages = []
 
 const MeetingPage = () => {
-  const numOfItem = 8
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21].slice(0, numOfItem)
   const { width } = useWindowDimensions()
   const { history, match, location } = useRouter()
   const { roomId } = match.params
@@ -498,9 +496,9 @@ const MeetingPage = () => {
             {/* {isScreenShared && <MyVideoItem ref={userVideoRef} />}
             {!isScreenShared && ( */}
             <div className="meeting-videos" style={{ zIndex: 0 }}>
-              <VideoGrid numOfItem={numOfItem}>
+              <VideoGrid isScreenShared={isScreenShared}>
                 {[
-                  <MyVideoItem ref={userVideoRef} key={-1} />,
+                  <MyVideoItem ref={userVideoRef} key={-1} isScreenShared={isScreenShared} />,
                   ...peers.map(({ peerID, peer }) => <PartnerVideoItem key={peerID} peer={peer} />),
                   // ...items.map(id => <VideoGridItem key={id} />)
                 ]}
@@ -514,13 +512,6 @@ const MeetingPage = () => {
           <div className="meeting-info">
             {isShowMessenger && (
               <MessengerBox sendMsg={sendMsg} messageList={messageList} closeMessenger={messengerButtonHandler} />
-            )}
-            {!isShowMessenger && !isShowParticipant && isScreenShared && (
-              <VideoGrid numOfItem={Math.min(numOfItem, 12)}>
-                {items.slice(0, 12).map(id => (
-                  <VideoGridItem key={id} />
-                ))}
-              </VideoGrid>
             )}
           </div>
         )}

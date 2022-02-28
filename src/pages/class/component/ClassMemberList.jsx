@@ -103,14 +103,7 @@ const ClassMemberList = ({ className }) => {
           loader={<h4>Loading...</h4>}
           scrollableTarget="memberList"
           style={{ display: 'flex', flexDirection: 'column' }}
-          endMessage={
-            !isLoading && (
-              <div style={{ alignSelf: 'center' }}>
-                {Empty.PRESENTED_IMAGE_DEFAULT}
-                <h4> No more meeting here !</h4>
-              </div>
-            )
-          }
+          endMessage=""
         >
           {isLoading && <Spin size="large" />}
           {!isLoading &&

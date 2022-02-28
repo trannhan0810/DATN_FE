@@ -94,7 +94,15 @@ const ClassMessenger = ({ className }) => {
           style={{ display: 'flex', flexDirection: 'column-reverse' }}
           endMessage={
             !isLoading && (
-              <div style={{ alignSelf: 'center' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: 400,
+                }}
+              >
                 {Empty.PRESENTED_IMAGE_DEFAULT}
                 <h4> No more post here !</h4>
               </div>

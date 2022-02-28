@@ -42,8 +42,8 @@ function ClassDetailCard(props) {
         <EllipsisFlexText>{classInfo.name}</EllipsisFlexText>
       </div>
       <Tooltip onClick={() => startMeeting(classInfo.id)}>
-        <button type="button" className="add-button" style={{ cursor: 'pointer' }}>
-          <VideoCameraOutlined /> Meet
+        <button type="button" className="add-button" style={{ cursor: 'pointer', fontSize: 20 }}>
+          <VideoCameraOutlined style={{ marginRight: 8 }} /> {' Meet'}
         </button>
       </Tooltip>
     </ClassInfoHeader>

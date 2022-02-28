@@ -15,6 +15,7 @@ const MyVideoItem = React.forwardRef((props, ref) => {
         ref={ref}
         style={{
           transform: isScreenShared ? 'rotateY(0deg)' : 'rotateY(180deg)',
+          objectFit: isScreenShared ? 'contain' : 'cover',
         }}
       />
     </VideoItem>

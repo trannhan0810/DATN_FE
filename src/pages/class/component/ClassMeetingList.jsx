@@ -86,10 +86,20 @@ const ClassMeetingList = ({ className }) => {
           scrollableTarget="meetingList"
           style={{ display: 'flex', flexDirection: 'column' }}
           endMessage={
-            !isLoading && (
-              <div style={{ alignSelf: 'center' }}>
+            !isLoading &&
+            meetings?.length === 0 && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '100%',
+                  height: 400,
+                }}
+              >
                 {Empty.PRESENTED_IMAGE_DEFAULT}
-                <h4> No more meeting here !</h4>
+                <h4> No meeting here !</h4>
               </div>
             )
           }

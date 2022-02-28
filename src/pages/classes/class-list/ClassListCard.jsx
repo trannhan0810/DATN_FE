@@ -45,7 +45,11 @@ const ClassListCard = props => {
           </div>
         )}
         {filterClasses.map(classItem => (
-          <ClassListItem key={classItem.id} onClick={() => history.push(`/classes/${classItem.id}`)}>
+          <ClassListItem
+            style={{ backgroundColor: classId === classItem.id ? 'white' : 'transparent' }}
+            key={classItem.id}
+            onClick={() => history.push(`/classes/${classItem.id}`)}
+          >
             <div className="class-list-item-avatar">
               {classItem.avatar ? (
                 <Avatar size={48} src={classItem.avatar} shape="square" />

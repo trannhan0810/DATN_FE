@@ -51,7 +51,7 @@ const UserItemWrapper = styled.div`
   }
 `
 
-const UserItem = props => {
+const AddMemberItem = props => {
   const { className, user, onAdd } = props
 
   return (
@@ -63,16 +63,14 @@ const UserItem = props => {
         <b className="user-name">{user.fullName}</b>
         <small className="user-email">{user.email}</small>
       </div>
-      <div className="actions-buttons">
-        <Tooltip className="add-btn" onCLick={onAdd}>
-          Add
-        </Tooltip>
-      </div>
+      <button type="button" className="btn-add" onClick={onAdd}>
+        <Tooltip>Add</Tooltip>
+      </button>
     </UserItemWrapper>
   )
 }
 
-UserItem.propTypes = {
+AddMemberItem.propTypes = {
   className: PropTypes.string,
   user: PropTypes.shape({
     fullName: PropTypes.string,
@@ -83,4 +81,4 @@ UserItem.propTypes = {
   onAdd: PropTypes.func,
 }
 
-export default UserItem
+export default AddMemberItem

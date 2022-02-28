@@ -19,6 +19,7 @@ const HomeLayoutStyle = styled.div`
     padding: 8px 12px;
     border-radius: 4px;
     margin-left: 8px;
+    cursor: pointer;
   }
 
   .home-header {

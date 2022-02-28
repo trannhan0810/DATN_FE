@@ -75,6 +75,7 @@ const useClassMember = () => {
     onChangePagination,
     setCurrentPage,
     onFilters,
+    fetchInitialClassMembers,
     fetchMoreClassMembers,
   }
 }

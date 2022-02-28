@@ -7,6 +7,7 @@ import { useParams } from 'react-router'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Search } from '@mui/icons-material'
 import UserItem from './UserItem'
+import AddMemberDrawer from './AddMemberDrawer'
 import useClassMember from 'shared/hooks/useClassMembers'
 
 const ClassMemberListWrapper = styled.div`
@@ -71,55 +72,64 @@ const ClassMemberListWrapper = styled.div`
 
 const ClassMemberList = ({ className }) => {
   const { classId } = useParams()
-  const { members, hasMore, fetchMoreClassMembers, isLoading } = useClassMember(classId)
-  const [isAddUser, setIsAddUser] = useState(false)
+  const {
+    members,
+    hasMore,
+    fetchMoreClassMembers,
+    isLoading,
+    fetchInitialClassMembers: refreshMemberList,
+  } = useClassMember(classId)
+  const [showAddMember, setAddMember] = useState(false)
   const searchRef = useRef()
 
   return (
     <ClassMemberListWrapper className={className} id="memberList">
       <div className="classMemberList-footer">
         <div className="search-bar">
-          <input ref={searchRef} placeholder={isAddUser ? 'Search member' : 'Search member in class'} />
+          <input ref={searchRef} placeholder={showAddMember ? 'Search member' : 'Search member in class'} />
           <Search />
         </div>
 
-        <Tooltip className="add-button" onClick={() => setIsAddUser(!isAddUser)}>
+        <Tooltip className="add-button" onClick={() => setAddMember(!showAddMember)}>
           <UserAddOutlined className="add-icon" />
-          {isAddUser ? 'Done' : 'Add Member'}
+          Add Member
         </Tooltip>
       </div>
       <div className="classMemberList-content">
-        {!isAddUser && (
-          <InfiniteScroll
-            dataLength={members?.length || 0}
-            next={fetchMoreClassMembers}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-            scrollableTarget="memberList"
-            style={{ display: 'flex', flexDirection: 'column' }}
-            endMessage={
-              !isLoading && (
-                <div style={{ alignSelf: 'center' }}>
-                  {Empty.PRESENTED_IMAGE_DEFAULT}
-                  <h4> No more meeting here !</h4>
-                </div>
-              )
-            }
-          >
-            {isLoading && <Spin size="large" />}
-            {!isLoading &&
-              members.map(user => (
-                <UserItem
-                  className="classMemberList-user-item"
-                  key={user.id}
-                  user={user}
-                  onView={() => {}}
-                  onEdit={() => {}}
-                  onDelete={() => {}}
-                />
-              ))}
-          </InfiniteScroll>
-        )}
+        <InfiniteScroll
+          dataLength={members?.length || 0}
+          next={fetchMoreClassMembers}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          scrollableTarget="memberList"
+          style={{ display: 'flex', flexDirection: 'column' }}
+          endMessage={
+            !isLoading && (
+              <div style={{ alignSelf: 'center' }}>
+                {Empty.PRESENTED_IMAGE_DEFAULT}
+                <h4> No more meeting here !</h4>
+              </div>
+            )
+          }
+        >
+          {isLoading && <Spin size="large" />}
+          {!isLoading &&
+            members.map(user => (
+              <UserItem
+                className="classMemberList-user-item"
+                key={user.id}
+                user={user}
+                onView={() => {}}
+                onEdit={() => {}}
+                onDelete={() => {}}
+              />
+            ))}
+        </InfiniteScroll>
+        <AddMemberDrawer
+          visible={showAddMember}
+          close={() => setAddMember(false)}
+          refreshMemberList={refreshMemberList}
+        />
       </div>
     </ClassMemberListWrapper>
   )

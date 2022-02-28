@@ -142,6 +142,7 @@ const MeetingPage = () => {
     if (userStream.current) {
       userStream.current.getTracks().forEach(track => track.stop())
     }
+    socketRef.current.disconnect()
     history.push('/classes')
   }
 

@@ -97,8 +97,13 @@ const HeaderWrapper = styled.div`
 
   .header-avatar {
     height: 32px;
-    border-radius: 50%;
-    margin-right: 16px;
+    width: 32px;
+    display: flex;
+    justify-contents: center;
+    align-items: center;
+    // border-radius: 50%;
+    // margin-right: 16px;
+    background-color: black;
   }
 
   .profile-options {

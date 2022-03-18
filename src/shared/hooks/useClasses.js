@@ -3,7 +3,7 @@ import { isEqual } from 'lodash-es'
 import { convertQueryToParams } from '../utils/query-until'
 import usePagination from './usePagination'
 import { showError, showSuccess } from 'core/tools'
-import { getClasses, postClass, putClass } from 'api/class'
+import { getClasses, postClass, putClass, joinClassApi } from 'api/class'
 
 const useClasses = () => {
   const { pageSize, currentPage, sorter, onChangePagination, setCurrentPage } = usePagination()
@@ -64,6 +64,22 @@ const useClasses = () => {
     }
   }
 
+  const joinClass = async values => {
+    try {
+      setIsUpsert(true)
+      const response = await joinClassApi(values)
+      if (response) {
+        getClassList()
+        showSuccess(`Join into class`)
+        return response?.data // TODO: Close Modal
+      }
+    } catch (error) {
+      showError(error)
+    } finally {
+      setIsUpsert(false)
+    }
+  }
+
   // Update class
   const updateClass = async values => {
     try {
@@ -98,6 +114,7 @@ const useClasses = () => {
     setCurrentPage,
     onFilters,
     createClass,
+    joinClass,
     updateClass,
   }
 }

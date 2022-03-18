@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Tooltip } from 'antd'
 import styled from '@emotion/styled'
+import PropTypes from 'prop-types'
+import useClasses from 'shared/hooks/useClasses'
+import { showError } from 'core/tools'
 
 const DrawerContentWrapper = styled.div`
   width: 100%;
@@ -44,20 +47,40 @@ const DrawerContentWrapper = styled.div`
   }
 `
 
-const CreateClass = () => {
+const JoinClass = props => {
+  const inputRef = useRef()
+  const { onOK } = props
+  const { joinClass } = useClasses()
+
   return (
     <DrawerContentWrapper>
       <div className="drawer-inner">
         <div> Enter invite code </div>
         <div className="input-holder">
-          <input />
+          <input ref={inputRef} />
         </div>
-        <Tooltip>
-          <div className="btn-add">Join</div>
+        <Tooltip
+          onClick={async () => {
+            if (inputRef.current.value?.length > 0) {
+              await joinClass({ code: inputRef.current.value })
+              onOK()
+              window.location.reload()
+            } else {
+              showError('Invite code must not empty')
+            }
+          }}
+        >
+          <button type="button" className="btn-add">
+            Join
+          </button>
         </Tooltip>
       </div>
     </DrawerContentWrapper>
   )
 }
 
-export default CreateClass
+JoinClass.propTypes = {
+  onOK: PropTypes.func,
+}
+
+export default JoinClass

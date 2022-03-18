@@ -13,6 +13,11 @@ export const postClass = data =>
     policy: data.policy,
   })
 
+export const joinClassApi = data =>
+  request.post('api/v1/classes/join', {
+    code: data.code,
+  })
+
 export const putClass = (id, data) =>
   request.put(`api/v1/classes/${id}`, {
     name: data.name,

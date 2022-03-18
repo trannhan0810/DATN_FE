@@ -32,7 +32,7 @@ function Header(props) {
           </div> */}
           <div className="header-profile">
             {/* <span className="header-user-name"> Name </span> */}
-            <InitialsAvatar alt="" src={defaultAvatar} name={user.fullName || ''} />
+            {user.avatar ? <Avatar size={48} src={user.avatar} /> : <InitialsAvatar name={user.name || 'No name'} />}
             <Dropdown overlay={<HeaderMenu />} trigger={['click']} placement="bottomRight">
               <div className="header-icon">
                 <MoreOutlined rotate={90} className="btn-logout" />

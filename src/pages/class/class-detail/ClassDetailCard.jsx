@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { VideoCameraOutlined } from '@ant-design/icons'
+import { CopyOutlined, VideoCameraOutlined } from '@ant-design/icons'
 import { Empty, Tooltip } from 'antd'
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -17,6 +17,7 @@ import EllipsisFlexText from 'shared/components/EllipsisFlexText'
 import FoldCard from 'shared/components/fold-card/FoldCard'
 import useWindowDimensions from 'shared/hooks/useWindowDimensions'
 import useRouter from 'shared/hooks/useRouter'
+import { showSuccess } from 'core/tools'
 
 function ClassDetailCard(props) {
   const { classId } = useParams()
@@ -41,7 +42,20 @@ function ClassDetailCard(props) {
         {width < 720 && <MenuOpen style={{ marginRight: 8 }} onClick={() => history.push('/classes')} />}
         <EllipsisFlexText>{classInfo.name}</EllipsisFlexText>
       </div>
-      <Tooltip onClick={() => startMeeting(classInfo.id)}>
+      <Tooltip
+        title="Copy invite code"
+        onClick={() => {
+          if (classInfo.id) {
+            navigator.clipboard.writeText(classInfo.id)
+            showSuccess('Invite code has been copied')
+          }
+        }}
+      >
+        <button type="button" className="add-button" style={{ cursor: 'pointer', fontSize: 20 }}>
+          <CopyOutlined style={{ marginRight: 2 }} />
+        </button>
+      </Tooltip>
+      <Tooltip title="Start new meeting" onClick={() => startMeeting(classInfo.id)}>
         <button type="button" className="add-button" style={{ cursor: 'pointer', fontSize: 20 }}>
           <VideoCameraOutlined style={{ marginRight: 8 }} /> {' Meet'}
         </button>

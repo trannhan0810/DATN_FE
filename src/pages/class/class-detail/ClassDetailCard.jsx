@@ -51,12 +51,12 @@ function ClassDetailCard(props) {
           }
         }}
       >
-        <button type="button" className="add-button" style={{ cursor: 'pointer', fontSize: 20 }}>
-          <CopyOutlined style={{ marginRight: 2 }} />
+        <button type="button" className="add-button" style={{ cursor: 'pointer', fontSize: 20, height: 43 }}>
+          <CopyOutlined style={{ marginRight: 0 }} />
         </button>
       </Tooltip>
       <Tooltip title="Start new meeting" onClick={() => startMeeting(classInfo.id)}>
-        <button type="button" className="add-button" style={{ cursor: 'pointer', fontSize: 20 }}>
+        <button type="button" className="add-button" style={{ cursor: 'pointer', fontSize: 20, height: 43 }}>
           <VideoCameraOutlined style={{ marginRight: 8 }} /> {' Meet'}
         </button>
       </Tooltip>

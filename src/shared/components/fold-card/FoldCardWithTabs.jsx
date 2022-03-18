@@ -53,6 +53,7 @@ function FoldCardWithTabs(props) {
             borderBottom: '2px solid lightgray',
             display: 'flex',
             alignItems: 'center',
+            padding: 0,
           }}
         >
           {FoldCardHeader}
